@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "87220152401",
+    "project_id": "teamsc-8674b",
+    "storage_bucket": "teamsc-8674b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87220152401:android:acafbb34abf4102767b070",
+        "android_client_info": {
+          "package_name": "com.example.bcd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87220152401-bbls37l2lg358t2jhiaakqihkgo4fukr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLJu2mBn_48GJujDwwWBpyvZXV9QOHI48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87220152401-bbls37l2lg358t2jhiaakqihkgo4fukr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

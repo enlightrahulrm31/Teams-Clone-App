@@ -1,4 +1,4 @@
-wpackage com.example.bcd
+package com.example.bcd
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

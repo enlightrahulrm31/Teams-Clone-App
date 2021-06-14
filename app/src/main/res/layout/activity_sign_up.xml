@@ -32,6 +32,17 @@
             android:text="Please SignUp to continue using app " />
 
         <EditText
+            android:id="@+id/singupname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:hint="NAME"
+            android:textSize="15sp"
+            android:ems="10"
+            android:inputType="text" />
+
+
+        <EditText
             android:id="@+id/singupEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -19,6 +19,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {                    // this maven is  for video calling app if doesent work remove  it from the dependency
+            url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
+        }
     }
 }
 

@@ -6,25 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".DashboardActivity">
 
-    <TextView
-        android:id="@+id/Uname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/Uemail"
+        android:id="@+id/Uname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="TextView"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Uname" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/scode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Enter secret code "
+        app:layout_constraintTop_toBottomOf="@+id/Uname"
+        tools:layout_editor_absoluteX="67dp" />
+
+    <Button
+        android:id="@+id/Buttonjoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Meet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.356"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scode" />
 </androidx.constraintlayout.widget.ConstraintLayout>

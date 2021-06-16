@@ -4,16 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity4">
+    tools:context=".MainActivity4"
+    >
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WELCOME PAGE..."
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <ImageView
+       android:id="@+id/imageView3"
+       android:layout_width="400dp"
+       android:layout_height="500dp"
+       android:layout_marginTop="92dp"
+       android:layout_marginBottom="20dp"
+       app:layout_constraintBottom_toTopOf="@+id/textView2"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.454"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:srcCompat="@drawable/temsintro" />
+
+   <TextView
+       android:id="@+id/textView2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="30dp"
+       android:text="WELCOME . . . "
+       android:textAllCaps="true"
+       android:textColor="#9C27B0"
+       android:textSize="30sp"
+       android:textStyle="bold|italic"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.55"
+       app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

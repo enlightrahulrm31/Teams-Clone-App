@@ -50,9 +50,12 @@ class SignUpActivity : AppCompatActivity() {
                 if(it.isSuccessful){
                     // code
                     val userid: String=firebaseauth.currentUser?.uid.toString()
+                    var u= User()
+                    u.NAME=name
+                    u.EMAIL=email
                   //   val dr:DocumentReference = database.collection("users").document(userid)
-                     val hashmap:HashMap<String,String> = hashMapOf("Name" to name,"Email" to email) // created a hashmap in which i am storing its data of logged in users
-                    database.collection("users").add(hashmap)
+                   //  val hashmap:HashMap<String,String> = hashMapOf("Name" to name,"Email" to email) // created a hashmap in which i am storing its data of logged in users
+                    /*database.collection("users").add(hashmap)
                             .addOnSuccessListener {
                                 Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
                                 val intent:Intent = Intent(this,DashboardActivity::class.java)
@@ -60,8 +63,20 @@ class SignUpActivity : AppCompatActivity() {
                                 intent.putExtra("UserEmailid",hashmap["Email"])  // passing data to Dashboard activity
                                 startActivity(intent)
 
-                            }
+                            }*/
                 //    Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
+
+           //  below is trying code  in case the sytem fails delete this and run above code
+                    database.collection("users").add(u)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, SignUpActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+
+
+
                 }
                 else{
                     Toast.makeText(this, email, Toast.LENGTH_SHORT).show()

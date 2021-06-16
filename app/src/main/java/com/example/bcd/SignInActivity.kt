@@ -27,7 +27,7 @@ class SignInActivity : AppCompatActivity() {
     private fun SignInUser(){
         val eid = findViewById<EditText>(R.id.LoginEmailAddress)   //  id for email address
         val pss = findViewById<EditText>(R.id.LoginPassword)         //  id for password view
-        val email:String = eid.text.toString()
+        var email:String = eid.text.toString()
         val password:String = pss.text.toString()
 
         if(email.isBlank() || password.isBlank() ){                                    // Handling the case when email , password is left blank
@@ -42,20 +42,29 @@ class SignInActivity : AppCompatActivity() {
                   database.collection("users").get()    // it is used to retrive all data of user from firestore database
                             .addOnSuccessListener { result->
                                 var username :String ="NOT VALID"
-                                for (document in result){
+                                var cnt:Int =0
+                                /*for (document in result){
                                   //  document.data["Name"] // this is token  like map
-                                    if(document.data["Email"]==email){
+                                    if(document.data["Email"].toString()==email){
                                          username=document.data["Name"].toString()
                                         break
                                     }
-                                    //
+                                }*/
+                                for (document in result){
+                                    if(document.data["email"].toString()==email){
+                                        username = document.data["name"].toString()
+                                        break
+                                    }
                                 }
-                                Toast.makeText(this,"Logged in successfully ", Toast.LENGTH_SHORT).show()
+
+                            //    Toast.makeText(this,"Logged in successfully ", Toast.LENGTH_SHORT).show()
                                 val intent: Intent = Intent(this,DashboardActivity::class.java)
                                 intent.putExtra("UserName",username) // passing data to Dashboard activity
                                 intent.putExtra("UserEmailid",email)  // passing data to Dashboard activity
                                 startActivity(intent)
+                                finish()
                             }
+
 
                     //Toast.makeText(this, "Logged In Successfully!.", Toast.LENGTH_SHORT).show()
                 }

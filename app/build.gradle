@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id 'kotlin-android-extensions'   // dont have to use find view by id again and again
 }
 
 android {
@@ -10,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.bcd"
-        minSdkVersion 21
+        minSdkVersion 23     // changed from  21 to 23 for video calling
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -43,6 +44,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation platform('com.google.firebase:firebase-bom:28.1.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0' // cirular progress bar
+    implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }   // this is video call dependency if it dosent work remove it from this
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

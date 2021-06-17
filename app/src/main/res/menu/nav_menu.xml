@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn= "navigation_view"
+    >
+
+    <item
+        android:id="@+id/Members"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="All Members"/>
+    <item
+        android:id="@+id/createMeet"
+        android:icon="@drawable/ic_baseline_meeting_room_24"
+        android:title="Create Meet"/>
+
+
+    <item android:title="Profile">
+        <menu>
+            <item
+                android:id="@+id/MyProfile"
+                android:title="My Profile"/>
+
+
+            <item
+                android:id="@+id/Logout"
+                android:title="Logout"/>
+
+        </menu>
+
+    </item>
+
+
+
+
+
+
+</menu>

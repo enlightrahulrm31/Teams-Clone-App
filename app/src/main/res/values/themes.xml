@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Bcd" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Bcd" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- NoActionBar  MAKE ACTION BAR INVISIBLE -->
+        <!-- DarkActionBar MAKES ACTION BAR VISIBLE  -->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

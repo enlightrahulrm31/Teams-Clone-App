@@ -56,14 +56,15 @@ class SignInActivity : AppCompatActivity() {
                                         break
                                     }
                                 }
-
                             //    Toast.makeText(this,"Logged in successfully ", Toast.LENGTH_SHORT).show()
-                                val intent: Intent = Intent(this,DashboardActivity::class.java)
-                                intent.putExtra("UserName",username) // passing data to Dashboard activity
+                                val intent: Intent = Intent(this,BoardingActivity::class.java)
+                                intent.putExtra("SendingUserName","MAHANT") // passing data to Dashboard activity
                                 intent.putExtra("UserEmailid",email)  // passing data to Dashboard activity
                                 startActivity(intent)
                                 finish()
+
                             }
+
 
 
                     //Toast.makeText(this, "Logged In Successfully!.", Toast.LENGTH_SHORT).show()

@@ -70,16 +70,14 @@ class SignUpActivity : AppCompatActivity() {
                     database.collection("users").add(u)
                         .addOnSuccessListener {
                             Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, SignUpActivity::class.java)
+                            val intent = Intent(this, SignInActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
 
-
-
                 }
                 else{
-                    Toast.makeText(this, email, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()  // showing toast message if anything goes wrong
                 }
             }
     }

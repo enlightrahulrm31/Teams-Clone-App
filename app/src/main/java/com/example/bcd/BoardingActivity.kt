@@ -33,6 +33,7 @@ class BoardingActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val  intentjoinmeet : Intent = Intent(this,DashboardActivity::class.java)
         val  intentdasboard: Intent = Intent(this,ReclyclerViewActivity::class.java)
+        val  intentMainActivity: Intent = Intent(this,MainActivity::class.java)
         val u = firebaseauth.currentUser
         val em = u?.email
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
@@ -53,11 +54,18 @@ class BoardingActivity : AppCompatActivity() {
                 R.id.createMeet ->{
                     startActivity(intentjoinmeet)
                 }
-                R.id.MyProfile -> Toast.makeText(this,"My Profile", Toast.LENGTH_SHORT).show()
-                R.id.Logout -> Toast.makeText(this, "Logged out ", Toast.LENGTH_SHORT).show()
+                R.id.MyProfile ->Toast.makeText(this,"My Profile", Toast.LENGTH_SHORT).show()
+                R.id.Logout ->{
+                    Toast.makeText(this, "Logged out ", Toast.LENGTH_SHORT).show()
+                    firebaseauth.signOut()
+                    finish()
+                    startActivity(intentMainActivity)
+
+                }
             }
             true
         }
+
 
     }
 

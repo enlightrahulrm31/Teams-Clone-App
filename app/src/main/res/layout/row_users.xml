@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         android:layout_weight="1">
         <!-- circular image added -->
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
              android:layout_width="0dp"
              android:layout_height="match_parent"
              android:src="@drawable/ic_baseline_person_24"
@@ -43,8 +43,15 @@
             android:text="UserEmail"
             />
 
-
     </LinearLayout>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Button"
+            android:id="@+id/Tvbutton"
+            />
+
     </LinearLayout>
 
 

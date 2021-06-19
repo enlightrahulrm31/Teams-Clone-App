@@ -47,7 +47,11 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0' // cirular progress bar
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }   // this is video call dependency if it dosent work remove it from this
+    implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }
+    // firebase messaging
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+
+// this is video call dependency if it dosent work remove it from this
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

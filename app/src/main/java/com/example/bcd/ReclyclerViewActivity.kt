@@ -16,9 +16,6 @@ import kotlinx.android.synthetic.main.activity_sign_in.view.*
 import kotlinx.android.synthetic.main.row_users.*
 
 class ReclyclerViewActivity : AppCompatActivity() {
-    lateinit var firebaseauth: FirebaseAuth
-    lateinit var database: FirebaseFirestore
-    var  currentemail:String ? =null
 
     private val db :FirebaseFirestore = FirebaseFirestore.getInstance()
     private val collectionReference:CollectionReference = db.collection("users")
@@ -26,15 +23,8 @@ class ReclyclerViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        firebaseauth = FirebaseAuth.getInstance()
-        database = FirebaseFirestore.getInstance()
-        val u = firebaseauth.currentUser
-        currentemail = u?.email
         setContentView(R.layout.activity_reclycler_view)
         setupRecyclerview()
-        Toast.makeText(this,"1", Toast.LENGTH_SHORT).show()
-
-
     }
 
     fun setupRecyclerview(){
@@ -49,7 +39,6 @@ class ReclyclerViewActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Toast.makeText(this,"2 ", Toast.LENGTH_SHORT).show()
         userAdapter?.startListening()
 
     }

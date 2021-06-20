@@ -11,12 +11,15 @@ android {
 
     defaultConfig {
         applicationId "com.example.bcd"
-        minSdkVersion 23     // changed from  21 to 23 for video calling
+        minSdkVersion 26     // changed from  21 to 23 for video calling // changed from 23 to 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures{
+        viewBinding =true
     }
 
     buildTypes {

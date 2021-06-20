@@ -13,8 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bcd">
+        <activity android:name=".DestinationActivity"></activity>
+        <activity android:name=".ManageMeetActivity" />
         <activity android:name=".BoardingActivity">
-            <!-- putting intents to check Boarding Activity-->
+
+            <!-- putting intents to check Boarding Activity -->
         </activity>
         <activity android:name=".ReclyclerViewActivity">
 
@@ -31,6 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <receiver android:name=".AlarmReciever" />
     </application>
 
 </manifest>

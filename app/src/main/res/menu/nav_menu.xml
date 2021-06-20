@@ -13,6 +13,11 @@
         android:icon="@drawable/ic_baseline_meeting_room_24"
         android:title="Create Meet"/>
 
+    <item
+        android:id="@+id/managemeet"
+        android:icon="@drawable/ic_baseline_timer_24"
+        android:title="Manage Meet"/>
+
 
     <item android:title="Profile">
         <menu>

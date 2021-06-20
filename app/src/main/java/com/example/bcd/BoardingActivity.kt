@@ -34,6 +34,7 @@ class BoardingActivity : AppCompatActivity() {
         val  intentjoinmeet : Intent = Intent(this,DashboardActivity::class.java)
         val  intentdasboard: Intent = Intent(this,ReclyclerViewActivity::class.java)
         val  intentMainActivity: Intent = Intent(this,MainActivity::class.java)
+        val  intentmanagemeet: Intent = Intent(this,ManageMeetActivity::class.java)
         val u = firebaseauth.currentUser
         val em = u?.email
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
@@ -53,6 +54,9 @@ class BoardingActivity : AppCompatActivity() {
                 }
                 R.id.createMeet ->{
                     startActivity(intentjoinmeet)
+                }
+                R.id.managemeet ->{
+                    startActivity(intentmanagemeet)
                 }
                 R.id.MyProfile ->Toast.makeText(this,"My Profile", Toast.LENGTH_SHORT).show()
                 R.id.Logout ->{

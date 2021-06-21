@@ -1,9 +1,6 @@
 package com.example.bcd
 
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -21,10 +18,16 @@ class ManageMeetActivity : AppCompatActivity() {
     private  lateinit var calender : Calendar
     private  lateinit var alarmManager: AlarmManager
     private  lateinit var pendingIntent: PendingIntent
+    var curday: Int =1
+    var curmonthDay: Int =1
+    var curyear: Int =1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_meet)
         createNotificationchannel()
+        selectdate.setOnClickListener {
+            showDatePicker()
+        }
         selecttime.setOnClickListener {
             showTimePicker()
 
@@ -40,6 +43,21 @@ class ManageMeetActivity : AppCompatActivity() {
 
         }
 
+    }
+    private fun showDatePicker() {
+        Toast.makeText(this,"date picker",Toast.LENGTH_LONG).show()
+        val cal  =Calendar.getInstance()
+        val year =cal.get(Calendar.YEAR)
+        val month =cal.get(Calendar.MONTH)
+        val date =cal.get(Calendar.DATE)
+        val  datepickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            selectdatetext.text= "Date:" + dayOfMonth + "/" + (month+1) + "/" + year
+            curday= dayOfMonth
+            curmonthDay = month
+            curyear = year
+
+        },year,month,date)
+        datepickerDialog.show()
     }
 
     private fun cancelAlarm() {

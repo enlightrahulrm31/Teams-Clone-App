@@ -35,43 +35,43 @@ class SignInActivity : AppCompatActivity() {
             return
         }
         firebaseauth.signInWithEmailAndPassword(email,password)
-            .addOnCompleteListener(this){
-                if(it.isSuccessful){
-                    // code
-                 //   val userid =firebaseauth.currentUser
-                  database.collection("users").get()    // it is used to retrive all data of user from firestore database
-                            .addOnSuccessListener { result->
-                                var username :String ="NOT VALID"
-                                var cnt:Int =0
-                                /*for (document in result){
-                                  //  document.data["Name"] // this is token  like map
-                                    if(document.data["Email"].toString()==email){
-                                         username=document.data["Name"].toString()
-                                        break
+                .addOnCompleteListener(this){
+                    if(it.isSuccessful){
+                        // code
+                        //   val userid =firebaseauth.currentUser
+                        database.collection("users").get()    // it is used to retrive all data of user from firestore database
+                                .addOnSuccessListener { result->
+                                    var username :String ="NOT VALID"
+                                    var cnt:Int =0
+                                    /*for (document in result){
+                                      //  document.data["Name"] // this is token  like map
+                                        if(document.data["Email"].toString()==email){
+                                             username=document.data["Name"].toString()
+                                            break
+                                        }
+                                    }*/
+                                    for (document in result){
+                                        if(document.data["email"].toString()==email){
+                                            username = document.data["name"].toString()
+                                            break
+                                        }
                                     }
-                                }*/
-                                for (document in result){
-                                    if(document.data["email"].toString()==email){
-                                        username = document.data["name"].toString()
-                                        break
-                                    }
+                                    //    Toast.makeText(this,"Logged in successfully ", Toast.LENGTH_SHORT).show()
+                                    val intent: Intent = Intent(this,BoardingActivity::class.java)
+                                    intent.putExtra("SendingUserName","MAHANT") // passing data to Dashboard activity
+                                    intent.putExtra("UserEmailid",email)  // passing data to Dashboard activity
+                                    startActivity(intent)
+                                    finish()
+
                                 }
-                            //    Toast.makeText(this,"Logged in successfully ", Toast.LENGTH_SHORT).show()
-                                val intent: Intent = Intent(this,BoardingActivity::class.java)
-                                intent.putExtra("SendingUserName","MAHANT") // passing data to Dashboard activity
-                                intent.putExtra("UserEmailid",email)  // passing data to Dashboard activity
-                                startActivity(intent)
-                                finish()
-
-                            }
 
 
 
-                    //Toast.makeText(this, "Logged In Successfully!.", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Logged In Successfully!.", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(this, "Error.", Toast.LENGTH_SHORT).show()
+                    }
                 }
-                else{
-                    Toast.makeText(this, "Error.", Toast.LENGTH_SHORT).show()
-                }
-            }
     }
 }

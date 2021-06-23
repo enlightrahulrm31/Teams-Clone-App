@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bcd">
-        <activity android:name=".DestinationActivity"></activity>
+        <activity android:name=".TeamRecyclerViewActivity">
+        </activity>
+        <activity android:name=".DestinationActivity" />
         <activity android:name=".ManageMeetActivity" />
         <activity android:name=".BoardingActivity">
 
@@ -32,8 +34,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".MainActivity" />
+
         <receiver android:name=".AlarmReciever" />
     </application>
 

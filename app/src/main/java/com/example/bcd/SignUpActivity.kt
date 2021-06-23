@@ -1,5 +1,6 @@
 package com.example.bcd
 
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
@@ -28,12 +29,15 @@ class SignUpActivity : AppCompatActivity() {
     var selecteduri :Uri ?=null
     var imgurl:String ?=null
     var checkIfuserSelectedImage:Boolean =false
+    var currentProgress=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
         val sgnUpButton =findViewById<Button>(R.id.btnsignup)
+        ProgressBar.max=10
+         currentProgress =10
         imagebutton.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type="image/*"
@@ -76,6 +80,9 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener(this){
                 if(it.isSuccessful){
                     // code
+                    ObjectAnimator.ofInt(ProgressBar,"progress",currentProgress)
+                        .setDuration(4000)
+                        .start()
                     val userid: String=firebaseauth.currentUser?.uid.toString()
                     u.NAME=name
                     u.EMAIL=email

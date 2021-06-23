@@ -10,6 +10,7 @@
     android:background="#FFFF"
     >
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_user_image"
         android:layout_width="60dp"
         android:layout_height="68dp"
         android:src="@drawable/ic_baseline_person_24"/>

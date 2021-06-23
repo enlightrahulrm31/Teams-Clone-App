@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +19,7 @@ class BoardingActivity : AppCompatActivity() {
     lateinit var firebaseauth: FirebaseAuth
     lateinit var database: FirebaseFirestore
      var  username:String = "NOT VALID"
+    var curUserUrl:String ?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_boarding)
@@ -42,6 +44,7 @@ class BoardingActivity : AppCompatActivity() {
                     for (document in result) {
                         if (document.data["email"].toString() == em) {   // if the email from document is found equal to email of signed in user then we will replace username to loged in user name
                             username = document.data["name"].toString()
+                            curUserUrl = document.data["userurl"].toString()
                             break
                         }
                     }
@@ -76,8 +79,15 @@ class BoardingActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {   // this is to make the hamberger work so that drawer opens
 
        // NavHeadername.text = incomingname
-        NavHeadername.text=username  // setting the nav header name to username
+        NavHeadername.text=username  // setting the nav header name to username  (IT IS THE NAV HEADER )
         NavHeaderemail.text =firebaseauth.currentUser?.email   // setting the nav user email to email
+        Glide      // user to download url of the image
+            .with(this)
+            .load(curUserUrl)
+            .centerCrop()
+            .placeholder(R.drawable.ic_baseline_person_24)
+            .into(nav_user_image);
+
       //  Toast.makeText(this,username, Toast.LENGTH_SHORT).show()
         if(toggle.onOptionsItemSelected(item)){
             return true;

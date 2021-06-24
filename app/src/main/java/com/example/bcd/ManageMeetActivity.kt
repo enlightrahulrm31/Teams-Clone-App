@@ -116,6 +116,9 @@ class ManageMeetActivity : AppCompatActivity() {
 
             }
             calender = Calendar.getInstance()
+            calender[Calendar.MONTH] = curmonthDay
+            calender[Calendar.YEAR] = curyear
+            calender[Calendar.DATE] = curday
             calender[Calendar.HOUR_OF_DAY] = picker.hour
             calender[Calendar.MINUTE] = picker.minute
             calender[Calendar.SECOND] = 0

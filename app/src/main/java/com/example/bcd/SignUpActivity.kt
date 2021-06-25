@@ -120,7 +120,7 @@ class SignUpActivity : AppCompatActivity() {
                          .addOnSuccessListener {
                               Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
                              //Toast.makeText(this,u.USERURL, Toast.LENGTH_SHORT).show()
-                              val intent = Intent(this,BoardingActivity::class.java)
+                              val intent = Intent(this,BoardingActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
                                startActivity(intent)
                                finish()
                          }

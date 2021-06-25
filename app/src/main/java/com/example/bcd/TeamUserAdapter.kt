@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat.getSystemServiceName
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import kotlinx.android.synthetic.main.activity_boarding.view.*
 import kotlinx.android.synthetic.main.activity_dashboard.view.*
 import kotlinx.android.synthetic.main.row_users.view.*
 import kotlinx.android.synthetic.main.team_row_user.view.*
@@ -36,7 +37,7 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
     var curminute:Int ?=null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamUserAdapterVH {
         return TeamUserAdapterVH(
-                LayoutInflater.from(parent.context).inflate(R.layout.team_row_user, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.team_row_user, parent, false)  // replace onboarding activity to team row user
         )
     }
 

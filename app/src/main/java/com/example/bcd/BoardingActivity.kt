@@ -8,10 +8,17 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.activity_boarding.*
+import kotlinx.android.synthetic.main.activity_reclycler_view.*
+import kotlinx.android.synthetic.main.activity_team_recycler_view.*
 import kotlinx.android.synthetic.main.nav_header.*
 
 class BoardingActivity : AppCompatActivity() {
@@ -20,9 +27,19 @@ class BoardingActivity : AppCompatActivity() {
     lateinit var database: FirebaseFirestore
      var  username:String = "NOT VALID"
     var curUserUrl:String ?=null
+    // added new
+    lateinit var db : FirebaseFirestore
+    lateinit var collectionReference: CollectionReference
+    var userAdapter: TeamUserAdapter?= null
+    // delete it it not works
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_boarding)
+      //  setContentView(R.layout.activity_boarding) // replace row user by activity boarding
+        db = FirebaseFirestore.getInstance()
+        collectionReference = db.collection("teammeetings")
+        setContentView(R.layout.activity_boarding)  // change it to activity_team_recycler_view as activity_reclycler_view
+         setupRecyclerview()
+        //
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerlayout)
@@ -75,6 +92,49 @@ class BoardingActivity : AppCompatActivity() {
 
 
     }
+    // newly added
+    /*fun setupRecyclerview(){
+        val  query : Query = collectionReference
+        val firestoreRecyclerOptions : FirestoreRecyclerOptions<TeamMeetingModel> =
+                FirestoreRecyclerOptions.Builder<TeamMeetingModel>()
+                        .setQuery(query,TeamMeetingModel::class.java).build()
+        userAdapter = TeamUserAdapter(firestoreRecyclerOptions,this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = userAdapter
+    }
+    override fun onStart() {
+        super.onStart()
+        userAdapter?.startListening()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        userAdapter?.startListening()
+
+    }
+    // delete it if not works*/
+    fun setupRecyclerview(){
+        val  query : Query = collectionReference
+        val firestoreRecyclerOptions : FirestoreRecyclerOptions<TeamMeetingModel> =
+                FirestoreRecyclerOptions.Builder<TeamMeetingModel>()
+                        .setQuery(query,TeamMeetingModel::class.java).build()
+        userAdapter = TeamUserAdapter(firestoreRecyclerOptions,this)
+        teamrecyclerView.layoutManager = LinearLayoutManager(this)
+        teamrecyclerView.adapter = userAdapter
+    }
+    override fun onStart() {
+        super.onStart()
+        userAdapter?.startListening()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        userAdapter?.startListening()
+
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {   // this is to make the hamberger work so that drawer opens
 

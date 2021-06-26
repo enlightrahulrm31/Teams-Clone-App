@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.activity_boarding.*
 import kotlinx.android.synthetic.main.activity_reclycler_view.*
 import kotlinx.android.synthetic.main.activity_sign_in.view.*
 import kotlinx.android.synthetic.main.row_users.*
@@ -33,7 +34,7 @@ class ReclyclerViewActivity : AppCompatActivity() {
             .setQuery(query,UserModel::class.java).build()
         userAdapter = UserAdapter(firestoreRecyclerOptions,this)
         recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = userAdapter
+        recyclerView.adapter = userAdapter
 
     }
 

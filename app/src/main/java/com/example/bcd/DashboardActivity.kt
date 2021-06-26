@@ -129,7 +129,7 @@ class DashboardActivity : AppCompatActivity() {
         database.collection( "teammeetings").add(u)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Meeting Created Successfully!.", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this,TeamRecyclerViewActivity::class.java)
+                    val intent = Intent(this,BoardingActivity::class.java)  // change it to teamRecyclerview
                     startActivity(intent)
                     finish()
                 }

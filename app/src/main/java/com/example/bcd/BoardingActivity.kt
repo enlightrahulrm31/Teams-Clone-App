@@ -120,7 +120,7 @@ class BoardingActivity : AppCompatActivity() {
                 FirestoreRecyclerOptions.Builder<TeamMeetingModel>()
                         .setQuery(query,TeamMeetingModel::class.java).build()
         userAdapter = TeamUserAdapter(firestoreRecyclerOptions,this)
-        teamrecyclerView.layoutManager = LinearLayoutManager(this)
+        teamrecyclerView.layoutManager = LinearLayoutManager(this)   // team recycler view is the id for for recycler view item which is present in activity boarding
         teamrecyclerView.adapter = userAdapter
     }
     override fun onStart() {

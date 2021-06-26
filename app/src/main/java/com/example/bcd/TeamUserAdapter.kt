@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.*
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +53,8 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
         holder.thisacceptinvite.setOnClickListener {
             createNotificationchannel()
             setAlarm()
+            holder.thisacceptinvite.setBackgroundColor(Color.GREEN) // Changing the background color of button of user that user get to know that he has accepted the invite
+            holder.thisacceptinvite.setText("INVITE ACCEPTED")    // Changing the text of button so that user get to know that he has accepted the invite
         }
 
     }

@@ -86,6 +86,7 @@ class SignUpActivity : AppCompatActivity() {
                     val userid: String=firebaseauth.currentUser?.uid.toString()
                     u.NAME=name
                     u.EMAIL=email
+                    u.UID=userid
                     if(checkIfuserSelectedImage==true) {
                         uploadimagetofirebase()
                     }

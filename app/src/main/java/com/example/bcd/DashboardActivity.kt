@@ -40,8 +40,16 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dashboard)
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
-        val username:String? =getIntent().getStringExtra("UserName")
-        useremailid = getIntent().getStringExtra("UserEmailid")
+        val CurrentUserId: String=firebaseauth.currentUser?.uid.toString()
+        database.collection("users").get()    // it is used to retrive all data of user from firestore database
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        if (document.data["uid"].toString() == CurrentUserId) {   // if the email from document is found equal to email of signed in user then we will replace username to loged in user name
+                            useremailid = document.data["email"].toString()
+                            break
+                        }
+                    }
+                }
        // val n = findViewById<TextView>(R.id.Uname)
         // n.setText(username)
        //  e.setText(useremailid)

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -26,6 +27,11 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
          holder.thisuseremail.text = model.email
          holder.thisuserbbutton.setOnClickListener {
              Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click
+         }
+         holder.itemView.setOnClickListener {
+             val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
+             intent.putExtra("senderemail",model.email)
+             k.startActivity(intent)
          }
 
      }

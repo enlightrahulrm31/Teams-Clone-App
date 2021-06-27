@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bcd">
-        <activity android:name=".WelcomeActivity"></activity>
-        <activity android:name=".TeamRecyclerViewActivity"></activity>
+        <activity android:name=".ChatRecyclerViewActivity"></activity>
+        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".TeamRecyclerViewActivity" />
         <activity android:name=".DestinationActivity" />
         <activity android:name=".ManageMeetActivity" />
         <activity android:name=".BoardingActivity">
@@ -25,7 +26,7 @@
 
             <!-- you can keep intent here to run recylcer view activity -->
         </activity>
-        <activity android:name=".DashboardActivity"></activity>
+        <activity android:name=".DashboardActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SpalshActivity"> <!-- THIS ACTIVITY IS  SPLASH ACTIVITY   here we will put intent -->

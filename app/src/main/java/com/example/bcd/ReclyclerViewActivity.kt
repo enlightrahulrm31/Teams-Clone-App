@@ -27,7 +27,6 @@ class ReclyclerViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reclycler_view)
         setupRecyclerview()
     }
-
     fun setupRecyclerview(){
         val  query : Query = collectionReference
         val firestoreRecyclerOptions : FirestoreRecyclerOptions<UserModel> =FirestoreRecyclerOptions.Builder<UserModel>()

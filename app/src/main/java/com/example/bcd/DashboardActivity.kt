@@ -134,6 +134,7 @@ class DashboardActivity : AppCompatActivity() {
         u.MIN = picker.minute
         u.MONTH = curmonthDay
         u.YEAR = curyear
+
         database.collection( "teammeetings").add(u)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Meeting Created Successfully!.", Toast.LENGTH_SHORT).show()

@@ -24,6 +24,7 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
     lateinit var ToEmail : String
     lateinit var FromEmail :String
     lateinit var tokenkey :String
+    lateinit var userurl :String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_recycler_view)
@@ -31,9 +32,18 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
         database = FirebaseFirestore.getInstance()
          ToEmail  = intent.getStringExtra("senderemail").toString()  // email of user to whom we are sending message
          FromEmail = firebaseauth.currentUser?.email.toString()   // this will give me the email id of current user
+        database.collection("users").get()    // it is used to retrive all data of user from firestore database
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        if (document.data["email"].toString() == FromEmail) {   // if the email from document is found equal to email of signed in user then we will replace username to loged in user name
+                            userurl = document.data["userurl"].toString()
+                            break
+                        }
+                    }
+                }
          tokenkey = constructkey(FromEmail,ToEmail)  // it is used to retrive all data of user from firestore database
           // when the key matches the required document then adapter will update otherwise  it wont and this is how is we will recieve different chat rooms for particular users
-        setupRecyclerview()   // setting up recylcer view to initiate CHAT Adapter and displaying item Chat  users
+        setupRecyclerview(FromEmail)   // setting up recylcer view to initiate CHAT Adapter and displaying item Chat  users
         sendmessagebutton.setOnClickListener {
             createmessagedoumnent()
         }
@@ -52,19 +62,20 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
         u.CHATTEXT = SendMessageText.text.toString()
         u.SENDEREMAIL=FromEmail
         u.RECIEVEREMAIL=ToEmail
+        u.SENDERURL= userurl
           // Now I have to create a key between sender and reciever such that it will unique for these pairs and both reciever and sneder can acess this key
         database.collection(tokenkey).add(u)     // creating database of sender and reciever with unique id as token key
             .addOnSuccessListener {
                 Toast.makeText(this,"Chat document created successfully", Toast.LENGTH_SHORT).show()
             }
     }
-    fun setupRecyclerview(){
+    fun setupRecyclerview(frommail:String){
         collectionReference = db.collection(tokenkey)
         val  query : Query = collectionReference!!
         val firestoreRecyclerOptions : FirestoreRecyclerOptions<ChatModel> =
             FirestoreRecyclerOptions.Builder<ChatModel>()
                 .setQuery(query,ChatModel::class.java).build()
-        userAdapter = ChatAdapter(firestoreRecyclerOptions,this)   // calling adapter class
+        userAdapter = ChatAdapter(firestoreRecyclerOptions,this,frommail)   // calling adapter class
         chatrecyclerView.layoutManager = LinearLayoutManager(this)   // team recycler view is the id for for recycler view item which is present in activity boarding
         chatrecyclerView.adapter = userAdapter
     }

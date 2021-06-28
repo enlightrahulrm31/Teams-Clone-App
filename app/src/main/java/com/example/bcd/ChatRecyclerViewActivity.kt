@@ -21,50 +21,50 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
     private val db :FirebaseFirestore = FirebaseFirestore.getInstance()
     var collectionReference:CollectionReference ? =null
     var userAdapter: ChatAdapter?= null
-    var CurrentUserId:String ?=null
-    var CurrentUserEmail:String ?=null
+    lateinit var ToEmail : String
+    lateinit var FromEmail :String
+    lateinit var tokenkey :String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_recycler_view)
- //
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
-        CurrentUserId =firebaseauth.currentUser?.uid.toString()
-        database.collection("users").get()    // it is used to retrive all data of user from firestore database
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    if (document.data["uid"].toString() == CurrentUserId) {   // if the email from document is found equal to email of signed in user then we will replace username to loged in user name
-                        CurrentUserEmail = document.data["email"].toString()
-                        break
-                    }
-                }
-            }
-        val sendToEmailUsermail : String =intent.getStringExtra("senderemail").toString()
-        val key:String = CurrentUserEmail +  sendToEmailUsermail
-        collectionReference = db.collection(key)   // when the key matches the required document then adapter will update otherwise  it wont and this is how is we will recieve different chat rooms for particular users
-        setupRecyclerview()
+         ToEmail  = intent.getStringExtra("senderemail").toString()  // email of user to whom we are sending message
+         FromEmail = firebaseauth.currentUser?.email.toString()   // this will give me the email id of current user
+         tokenkey = constructkey(FromEmail,ToEmail)  // it is used to retrive all data of user from firestore database
+          // when the key matches the required document then adapter will update otherwise  it wont and this is how is we will recieve different chat rooms for particular users
+        setupRecyclerview()   // setting up recylcer view to initiate CHAT Adapter and displaying item Chat  users
         sendmessagebutton.setOnClickListener {
-            createmessagedoumnent(intent.getStringExtra("senderemail").toString())
+            createmessagedoumnent()
         }
     }
 
-    private fun createmessagedoumnent(senderemail:String) {
-        var u= ChatData()
+    private fun constructkey(a: String, b: String): String {  // creating the token key on basis of which our documnet in firebase database in formed
+          if(a < b){
+              return a+b                             // it will be unique for every pair of  users
+          }
+          else{
+              return b+a
+          }
+    }
+    private fun createmessagedoumnent() {
+        var u= ChatData()     // creating object of ChatData class
         u.CHATTEXT = SendMessageText.text.toString()
-        u.SENDEREMAIL=CurrentUserEmail
-        u.RECIEVEREMAIL= senderemail
-        val key:String =CurrentUserEmail+senderemail   // Now I have to create a key between sender and reciever such that it will unique for these pairs and both reciever and sneder can acess this key
-        database.collection(key).add(u)
+        u.SENDEREMAIL=FromEmail
+        u.RECIEVEREMAIL=ToEmail
+          // Now I have to create a key between sender and reciever such that it will unique for these pairs and both reciever and sneder can acess this key
+        database.collection(tokenkey).add(u)     // creating database of sender and reciever with unique id as token key
             .addOnSuccessListener {
                 Toast.makeText(this,"Chat document created successfully", Toast.LENGTH_SHORT).show()
             }
     }
     fun setupRecyclerview(){
+        collectionReference = db.collection(tokenkey)
         val  query : Query = collectionReference!!
         val firestoreRecyclerOptions : FirestoreRecyclerOptions<ChatModel> =
             FirestoreRecyclerOptions.Builder<ChatModel>()
                 .setQuery(query,ChatModel::class.java).build()
-        userAdapter = ChatAdapter(firestoreRecyclerOptions,this)
+        userAdapter = ChatAdapter(firestoreRecyclerOptions,this)   // calling adapter class
         chatrecyclerView.layoutManager = LinearLayoutManager(this)   // team recycler view is the id for for recycler view item which is present in activity boarding
         chatrecyclerView.adapter = userAdapter
     }

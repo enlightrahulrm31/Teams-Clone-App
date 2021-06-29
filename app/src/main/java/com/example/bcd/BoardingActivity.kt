@@ -80,7 +80,7 @@ class BoardingActivity : AppCompatActivity() {
                 }
                 R.id.MyProfile ->Toast.makeText(this,"My Profile", Toast.LENGTH_SHORT).show()
                 R.id.Logout ->{
-                    Toast.makeText(this, "Logged out ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Logged out ", Toast.LENGTH_SHORT).show()
                     firebaseauth.signOut()
                     finish()
                     startActivity(intentMainActivity)
@@ -115,7 +115,7 @@ class BoardingActivity : AppCompatActivity() {
     }
     // delete it if not works*/
     fun setupRecyclerview(){
-        val  query : Query = collectionReference
+        val  query : Query = collectionReference.orderBy("day")//.orderBy("hour").orderBy("min") // sorting the query by min,hr,day
         val firestoreRecyclerOptions : FirestoreRecyclerOptions<TeamMeetingModel> =
                 FirestoreRecyclerOptions.Builder<TeamMeetingModel>()
                         .setQuery(query,TeamMeetingModel::class.java).build()

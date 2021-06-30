@@ -8,4 +8,5 @@ class TeamsMeetingData {
     var HOUR:Int ?=null
     var MIN :Int ?=null
     var USEREMAIL:String? =null
+    var METTINGCODE:String?=null
 }

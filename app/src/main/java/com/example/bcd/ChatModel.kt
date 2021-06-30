@@ -8,4 +8,5 @@ class ChatModel {
     var recieveremail:String ?=null
     var senderurl:String ?=null
     var curtime:Long?=null
+    var sendername:String ?=null
 }

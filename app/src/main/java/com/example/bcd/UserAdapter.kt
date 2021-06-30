@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.row_users.view.*
 class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context) :
     FirestoreRecyclerAdapter<UserModel, UserAdapter.UserAdapterVH>(options) {
      var k = context
+     var  name:String ?=null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapterVH {
          return UserAdapterVH(
              LayoutInflater.from(parent.context).inflate(R.layout.row_users, parent, false)
@@ -25,12 +26,14 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
      override fun onBindViewHolder(holder: UserAdapterVH, position: Int, model: UserModel) {
          holder.thisuserName.text = model.name
          holder.thisuseremail.text = model.email
+         name= model.email
          holder.thisuserbbutton.setOnClickListener {
              Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click
          }
          holder.itemView.setOnClickListener {
              val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
              intent.putExtra("senderemail",model.email)
+             intent.putExtra("sendername",model.name)
              k.startActivity(intent)
          }
 

@@ -8,5 +8,6 @@ class ChatData {
     var RECIEVEREMAIL:String ?=null
     var SENDERURL:String ?=null
     var CURTIME:Long ?=null
+    var SENDERNAME:String ?=null
 
 }

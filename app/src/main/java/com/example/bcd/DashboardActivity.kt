@@ -31,6 +31,7 @@ class DashboardActivity : AppCompatActivity() {
     private  lateinit var calender : Calendar
     private  lateinit var alarmManager: AlarmManager
     private  lateinit var pendingIntent: PendingIntent
+    private  lateinit var randomString: String
     var useremailid:String?=null
     var curday: Int =1
     var curmonthDay: Int =1
@@ -41,6 +42,9 @@ class DashboardActivity : AppCompatActivity() {
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
         val CurrentUserId: String=firebaseauth.currentUser?.uid.toString()
+        val alphabet: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        randomString = List(20) { alphabet.random() }.joinToString("")
+        randomString+=CurrentUserId
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
                 .addOnSuccessListener { result ->
                     for (document in result) {
@@ -134,7 +138,7 @@ class DashboardActivity : AppCompatActivity() {
         u.MIN = picker.minute
         u.MONTH = curmonthDay
         u.YEAR = curyear
-
+        u.METTINGCODE=randomString
         database.collection( "teammeetings").add(u)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Meeting Created Successfully!.", Toast.LENGTH_SHORT).show()

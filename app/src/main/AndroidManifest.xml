@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bcd">
-        <activity android:name=".ChatRecyclerViewActivity"></activity>
+        <activity android:name=".ChatRecyclerViewActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".TeamRecyclerViewActivity" />
         <activity android:name=".DestinationActivity" />

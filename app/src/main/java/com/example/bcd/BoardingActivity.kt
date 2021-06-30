@@ -66,6 +66,10 @@ class BoardingActivity : AppCompatActivity() {
                         }
                     }
                 }
+        createMeeting.setOnClickListener {
+             startActivity(intentjoinmeet)
+            finish()
+        }
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 // creating toast so that when we click it we get notified

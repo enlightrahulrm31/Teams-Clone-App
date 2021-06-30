@@ -8,4 +8,5 @@ class TeamMeetingModel {
     var hour:Int ?=null
     var min:Int ?=null
     var useremail:String? =null
+    var meetingcode:String ?=null
 }

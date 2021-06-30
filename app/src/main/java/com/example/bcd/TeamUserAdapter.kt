@@ -18,10 +18,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.common.collect.ComparisonChain.start
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_boarding.view.*
 import kotlinx.android.synthetic.main.activity_dashboard.view.*
 import kotlinx.android.synthetic.main.row_users.view.*
 import kotlinx.android.synthetic.main.team_row_user.view.*
+import org.jitsi.meet.sdk.JitsiMeet
+import org.jitsi.meet.sdk.JitsiMeetActivity
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
+import java.net.URL
 import java.util.*
 import kotlin.coroutines.coroutineContext
 
@@ -31,17 +36,18 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
     private  lateinit var calender : Calendar
     private  lateinit var alarmManager: AlarmManager
     private  lateinit var pendingIntent: PendingIntent
+    var database: FirebaseFirestore  = FirebaseFirestore.getInstance()
     var curday:Int ?=null
     var curmonthDay:Int ?=null
     var curyear:Int ?=null
     var curhour:Int ?=null
     var curminute:Int ?=null
+    var mc:String ?=null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamUserAdapterVH {
         return TeamUserAdapterVH(
                 LayoutInflater.from(parent.context).inflate(R.layout.team_row_user, parent, false)  // replace onboarding activity to team row user
         )
     }
-
     override fun onBindViewHolder(holder: TeamUserAdapterVH, position: Int, model: TeamMeetingModel) {
         holder.thismeetingdescription.text = model.description
         holder.thismeetorganiser.text=  model.useremail
@@ -50,13 +56,25 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
         curyear = model.year
         curhour =model.hour
         curminute =model.min
+        mc = curday.toString()+curmonthDay.toString()+curyear.toString()+curhour.toString()+curminute.toString()
+        val serverurl = URL("https://meet.jit.si")
+        var defaultOption = JitsiMeetConferenceOptions.Builder()
+                .setServerURL(serverurl)
+                .setWelcomePageEnabled(false).build()
+        JitsiMeet.setDefaultConferenceOptions(defaultOption)
+        holder.thisjoinmeet.setBackgroundColor(Color.MAGENTA)
         holder.thisacceptinvite.setOnClickListener {
+            Toast.makeText(k, mc, Toast.LENGTH_SHORT).show()
             createNotificationchannel()
             setAlarm()
             holder.thisacceptinvite.setBackgroundColor(Color.GREEN) // Changing the background color of button of user that user get to know that he has accepted the invite
             holder.thisacceptinvite.setText("INVITE ACCEPTED")    // Changing the text of button so that user get to know that he has accepted the invite
         }
-
+        holder.thisjoinmeet.setOnClickListener {
+            val opt = JitsiMeetConferenceOptions.Builder().setRoom(mc)
+                    .setWelcomePageEnabled(false).build()
+            JitsiMeetActivity.launch(k,opt)
+        }
     }
     fun setAlarm() {
         alarmManager = k.getSystemService(ALARM_SERVICE) as AlarmManager
@@ -96,6 +114,7 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
         var thismeetingdescription = itemView.Tvmeetingdescription
         var thismeetorganiser = itemView.Tvoraganiser
         var thisacceptinvite = itemView.acceptinvite
+        var thisjoinmeet =  itemView.joinmeeting
 
     }
 

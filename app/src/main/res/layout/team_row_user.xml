@@ -26,12 +26,29 @@
             android:textSize="16sp"
             android:padding="10dp"
             />
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/acceptinvite"
-            android:text="Accept Invite"
-            />
+            android:layout_weight='1'
+            android:orientation="horizontal"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/acceptinvite"
+                android:text="Accept Invite"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/joinmeeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Join Meeting"
+                app:iconTint="#009688" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

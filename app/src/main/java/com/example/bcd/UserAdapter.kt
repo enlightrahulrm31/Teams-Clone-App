@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import kotlinx.android.synthetic.main.nav_header.*
 import kotlinx.android.synthetic.main.row_users.view.*
 // added context argument in user adapter as we cant simply use this context here
 // I am calling this user adapter class in my recycler view activity
@@ -27,6 +29,12 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
          holder.thisuserName.text = model.name
          holder.thisuseremail.text = model.email
          name= model.email
+         Glide
+                 .with(k)
+                 .load(model.userurl)
+                 .centerCrop()
+                 .placeholder(R.drawable.ic_baseline_person_24)
+                 .into(holder.thisuserimage)
          holder.thisuserbbutton.setOnClickListener {
              Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click
          }
@@ -43,7 +51,7 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
          var thisuserName = itemView.Tvusername
          var thisuseremail = itemView.Tvuseremail
          var thisuserbbutton = itemView.Tvbutton
-
+         var thisuserimage = itemView.Tvuserimage
      }
 
 }

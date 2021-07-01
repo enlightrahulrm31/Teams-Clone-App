@@ -15,10 +15,9 @@ class ChatAdapter(options: FirestoreRecyclerOptions<ChatModel>, context: Context
     FirestoreRecyclerAdapter<ChatModel, ChatAdapter.ChatAdapterVH>(options){
     var k = context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapterVH {
-                 return ChatAdapterVH(
-                         LayoutInflater.from(parent.context).inflate(R.layout.chat_user_left, parent, false)
-                 )
-
+            return ChatAdapterVH(
+                    LayoutInflater.from(parent.context).inflate(R.layout.chat_user_left, parent, false)
+            )
     }
     override fun onBindViewHolder(holder: ChatAdapterVH, position: Int, model: ChatModel) {
             holder.thismessage.text = model.chattext.toString()

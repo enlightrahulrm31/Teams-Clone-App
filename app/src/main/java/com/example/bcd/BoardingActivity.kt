@@ -68,7 +68,7 @@ class BoardingActivity : AppCompatActivity() {
                 }
         createMeeting.setOnClickListener {
              startActivity(intentjoinmeet)
-            finish()
+             finish()
         }
         navView.setNavigationItemSelectedListener {
             when(it.itemId){

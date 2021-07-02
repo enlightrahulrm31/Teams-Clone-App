@@ -38,8 +38,8 @@ class BoardingActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         collectionReference = db.collection("teammeetings")
         setContentView(R.layout.activity_boarding)  // change it to activity_team_recycler_view as activity_reclycler_view
-         setupRecyclerview()
-        //
+        // setupRecyclerview()
+
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerlayout)
@@ -50,10 +50,10 @@ class BoardingActivity : AppCompatActivity() {
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val  intentjoinmeet : Intent = Intent(this,DashboardActivity::class.java)
+        val  intentjoinmeet : Intent = Intent(this,TeamRecyclerViewActivity::class.java)
         val  intentdasboard: Intent = Intent(this,ReclyclerViewActivity::class.java)
         val  intentMainActivity: Intent = Intent(this,MainActivity::class.java)
-        val  intentmanagemeet: Intent = Intent(this,ManageMeetActivity::class.java)
+        val  intentmanagemeet: Intent = Intent(this,DashboardActivity::class.java)
         val u = firebaseauth.currentUser
         val em = u?.email
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
@@ -66,10 +66,25 @@ class BoardingActivity : AppCompatActivity() {
                         }
                     }
                 }
-        createMeeting.setOnClickListener {
+        /*createMeeting.setOnClickListener {
              startActivity(intentjoinmeet)
              finish()
+        }*/
+        meetings.setOnClickListener {
+            startActivity(intentjoinmeet)
+
         }
+        createMeeting.setOnClickListener {
+            startActivity(intentmanagemeet)
+
+        }
+        Mycontact.setOnClickListener {
+            startActivity(intentdasboard)
+        }
+        myprofile.setOnClickListener {
+            Toast.makeText(this,"My Profile", Toast.LENGTH_SHORT).show()
+        }
+
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 // creating toast so that when we click it we get notified
@@ -118,7 +133,7 @@ class BoardingActivity : AppCompatActivity() {
 
     }
     // delete it if not works*/
-    fun setupRecyclerview(){
+    /*fun setupRecyclerview(){
         val  query : Query = collectionReference.orderBy("day")//.orderBy("hour").orderBy("min") // sorting the query by min,hr,day
         val firestoreRecyclerOptions : FirestoreRecyclerOptions<TeamMeetingModel> =
                 FirestoreRecyclerOptions.Builder<TeamMeetingModel>()
@@ -137,7 +152,7 @@ class BoardingActivity : AppCompatActivity() {
         super.onDestroy()
         userAdapter?.startListening()
 
-    }
+    }*/
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {   // this is to make the hamberger work so that drawer opens

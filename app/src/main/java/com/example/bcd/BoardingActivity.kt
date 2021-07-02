@@ -1,10 +1,12 @@
 package com.example.bcd
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
@@ -19,6 +21,7 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_boarding.*
 import kotlinx.android.synthetic.main.activity_reclycler_view.*
 import kotlinx.android.synthetic.main.activity_team_recycler_view.*
+import kotlinx.android.synthetic.main.custom_pop.*
 import kotlinx.android.synthetic.main.nav_header.*
 
 class BoardingActivity : AppCompatActivity() {
@@ -39,7 +42,7 @@ class BoardingActivity : AppCompatActivity() {
         collectionReference = db.collection("teammeetings")
         setContentView(R.layout.activity_boarding)  // change it to activity_team_recycler_view as activity_reclycler_view
         // setupRecyclerview()
-
+        var dialog :Dialog = Dialog(this)
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerlayout)
@@ -82,9 +85,17 @@ class BoardingActivity : AppCompatActivity() {
             startActivity(intentdasboard)
         }
         myprofile.setOnClickListener {
-            Toast.makeText(this,"My Profile", Toast.LENGTH_SHORT).show()
+            dialog.setContentView(R.layout.custom_pop)
+            Glide      // user to download url of the image
+                    .with(this)
+                    .load(curUserUrl)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_baseline_person_24)
+                    .into(dialog.findViewById(R.id.userimage))
+            dialog.findViewById<TextView>(R.id.DialogUsername).text = username
+            dialog.findViewById<TextView>(R.id.DialogEmail).text = firebaseauth.currentUser?.email
+            dialog.show()
         }
-
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 // creating toast so that when we click it we get notified

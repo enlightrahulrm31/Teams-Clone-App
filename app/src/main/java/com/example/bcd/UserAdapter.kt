@@ -1,10 +1,12 @@
 package com.example.bcd
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
@@ -21,6 +23,7 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
      var k = context
      var  name:String ?=null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapterVH {
+       //   val button:Button = dilog.findViewById(R.id.cancelbutton)
          return UserAdapterVH(
              LayoutInflater.from(parent.context).inflate(R.layout.row_users, parent, false)
          )
@@ -35,23 +38,35 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
                  .centerCrop()
                  .placeholder(R.drawable.ic_baseline_person_24)
                  .into(holder.thisuserimage)
-         holder.thisuserbbutton.setOnClickListener {
+         /*holder.thisuserbbutton.setOnClickListener {
              Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click
-         }
-         holder.itemView.setOnClickListener {
+         }*/
+        /* holder.itemView.setOnClickListener {
+             val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
+             intent.putExtra("senderemail",model.email)
+             intent.putExtra("sendername",model.name)
+             k.startActivity(intent)
+         }*/
+         holder.thismessage.setOnClickListener {
              val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
              intent.putExtra("senderemail",model.email)
              intent.putExtra("sendername",model.name)
              k.startActivity(intent)
          }
+         holder.thiscallbutton.setOnClickListener {
+             Toast.makeText(k,"Calling", Toast.LENGTH_SHORT).show()
+         }
 
      }
 
-     class UserAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    class UserAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
          var thisuserName = itemView.Tvusername
          var thisuseremail = itemView.Tvuseremail
-         var thisuserbbutton = itemView.Tvbutton
+       //  var thisuserbbutton = itemView.Tvbutton
          var thisuserimage = itemView.Tvuserimage
+         var thiscallbutton = itemView.callbutton
+          var thismessage = itemView.messagebutton
      }
 
 }

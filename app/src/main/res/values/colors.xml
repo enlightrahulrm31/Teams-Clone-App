@@ -10,4 +10,9 @@
     <color name="blue">#4A148C</color>
     <color name="lightyellow">#FFFFE0</color>
     <color  name="underline">#BDB8B8</color>
+    <!-- for dialog box -->
+    <color name="light_blue">#ADD8E6</color>
+    <color name="dark_green">#45bc62</color>
+    <color name="orange">#eaad43 </color>
+    <color name="dark_blue">#2f333f</color>
 </resources>

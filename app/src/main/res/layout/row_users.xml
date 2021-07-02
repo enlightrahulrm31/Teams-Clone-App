@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +22,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Tvuserimage"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="75dp"
             android:src="@drawable/ic_baseline_person_24"
             android:layout_weight="1"
             />
@@ -33,31 +34,66 @@
         android:orientation="vertical"
         android:layout_weight="1"
         >
+
         <TextView
             android:id="@+id/Tvusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:padding="10dp"
+
             android:text="UserName"
-            />
+            android:textAlignment="viewStart"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold|italic" />
+
         <TextView
             android:id="@+id/Tvuseremail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:padding="10dp"
             android:text="UserEmail"
-            />
+            android:textSize="16sp" />
 
     </LinearLayout>
-        <Button
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/messagebutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_message_24" />
+
+              <ImageView
+                  android:id="@+id/callbutton"
+                  android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toEndOf="@+id/messagebutton"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintVertical_bias="0.533"
+                  app:srcCompat="@drawable/ic_baseline_phone_24" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <!--  <Button
+            android:padding="10dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Button"
             android:id="@+id/Tvbutton"
-            />
+            /> -->
 
     </LinearLayout>
 

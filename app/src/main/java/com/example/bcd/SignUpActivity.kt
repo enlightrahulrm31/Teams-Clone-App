@@ -100,7 +100,7 @@ class SignUpActivity : AppCompatActivity() {
                                 Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this,BoardingActivity::class.java)
                                 intent.putExtra("url",it.toString())
-                               startActivity(intent)
+                                startActivity(intent)
                                finish()
                             }
                     }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -92,9 +93,19 @@ class BoardingActivity : AppCompatActivity() {
                     .centerCrop()
                     .placeholder(R.drawable.ic_baseline_person_24)
                     .into(dialog.findViewById(R.id.userimage))
+            dialog.findViewById<ImageView>(R.id.cancelbutton).setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.findViewById<Button>(R.id.editprofile).setOnClickListener {
+                val intent = Intent(this,ProfileActivity::class.java)
+                intent.putExtra("name",username)
+                intent.putExtra("email",firebaseauth.currentUser?.email)
+                startActivity(intent)
+            }
             dialog.findViewById<TextView>(R.id.DialogUsername).text = username
             dialog.findViewById<TextView>(R.id.DialogEmail).text = firebaseauth.currentUser?.email
             dialog.show()
+
         }
         navView.setNavigationItemSelectedListener {
             when(it.itemId){

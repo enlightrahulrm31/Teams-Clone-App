@@ -5,5 +5,6 @@ class User {
     var EMAIL:String?=null
     var UID:String?=null
     var USERURL:String?=null
+    var PHONENO:String ?=null
 
 }

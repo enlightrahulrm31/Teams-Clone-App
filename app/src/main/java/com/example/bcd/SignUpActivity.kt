@@ -90,11 +90,12 @@ class SignUpActivity : AppCompatActivity() {
                     u.EMAIL=email
                     u.UID=userid
                     if(checkIfuserSelectedImage==true) {
-                        uploadimagetofirebase()
+                        uploadimagetofirebase(email)
                     }
                     else {
                         // here I have to give default url for the sample image
                         //  below is trying code  in case the sytem fails delete this and run above code
+                        /*
                         database.collection("users").add(u)
                             .addOnSuccessListener {
                                 Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
@@ -102,7 +103,14 @@ class SignUpActivity : AppCompatActivity() {
                                 intent.putExtra("url",it.toString())
                                 startActivity(intent)
                                finish()
-                            }
+                            }*/
+                        database.collection("users").document(email).set(u)
+                            Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this,BoardingActivity::class.java)
+                            intent.putExtra("url",it.toString())
+                            startActivity(intent)
+                            finish()
+
                     }
                 }
                 else{
@@ -111,7 +119,7 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
 
-    private fun uploadimagetofirebase() {
+    private fun uploadimagetofirebase(email:String) {
         val filename =UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("$filename")
      //       Toast.makeText(this,selecteduri.toString(), Toast.LENGTH_SHORT).show()
@@ -119,14 +127,20 @@ class SignUpActivity : AppCompatActivity() {
              ref.downloadUrl.addOnSuccessListener{
                  imgurl=it.toString()    // taking the url of image that we have uploaded in firebase storage
                  u.USERURL=imgurl    // adding image url to our class user
-                 database.collection("users").add(u)
+                /* database.collection("users").add(u)
                          .addOnSuccessListener {
                               Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
                              //Toast.makeText(this,u.USERURL, Toast.LENGTH_SHORT).show()
                               val intent = Intent(this,BoardingActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
                                startActivity(intent)
                                finish()
-                         }
+                         }*/
+                 database.collection("users").document(email).set(u)
+                 Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
+                 val intent = Intent(this,BoardingActivity::class.java)
+                 intent.putExtra("url",it.toString())
+                 startActivity(intent)
+                 finish()
              }
          }
 

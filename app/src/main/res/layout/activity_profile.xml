@@ -92,37 +92,27 @@
         app:layout_constraintTop_toBottomOf="@+id/emailicon"
         app:srcCompat="@drawable/ic_baseline_phone_24" />
 
-    <EditText
-        android:id="@+id/Phoneno"
+    <TextView
+        android:id="@+id/Phonetext"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Phone no"
         android:inputType="textPersonName"
+        android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/imageView12"
         app:layout_constraintTop_toBottomOf="@+id/usermail" />
 
-    <Button
-        android:id="@+id/UpdateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Update"
+    <ImageView
+        android:id="@+id/infoicon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Phoneno" />
-
-    <TextView
-        android:id="@+id/Phonetext"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/Phoneno"
-        app:layout_constraintEnd_toEndOf="@+id/Phoneno"
-        app:layout_constraintStart_toEndOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="@+id/Phoneno" />
-
+        app:layout_constraintStart_toEndOf="@+id/Phoneno"
+        app:layout_constraintTop_toBottomOf="@+id/usermail"
+        app:srcCompat="@drawable/ic_baseline_edit_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

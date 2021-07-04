@@ -3,12 +3,17 @@ package com.example.bcd
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.ColorSpace
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -47,6 +52,8 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
              intent.putExtra("sendername",model.name)
              k.startActivity(intent)
          }*/
+
+         var phonenumber :String = model.phoneno.toString()
          holder.thismessage.setOnClickListener {
              val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
              intent.putExtra("senderemail",model.email)
@@ -55,11 +62,13 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
          }
          holder.thiscallbutton.setOnClickListener {
              Toast.makeText(k,"Calling", Toast.LENGTH_SHORT).show()
+             val intent = Intent(k,CallingActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
+             intent.putExtra("sendername",model.name)
+             intent.putExtra("photourl",model.userurl)
+             intent.putExtra("phonennumber",model.phoneno)
+             k.startActivity(intent)
          }
-
      }
-
-
     class UserAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
          var thisuserName = itemView.Tvusername
          var thisuseremail = itemView.Tvuseremail

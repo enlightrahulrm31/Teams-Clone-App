@@ -37,6 +37,7 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
         database = FirebaseFirestore.getInstance()
          ToEmail  = intent.getStringExtra("senderemail").toString()  // email of user to whom we are sending message
          FromEmail = firebaseauth.currentUser?.email.toString()   // this will give me the email id of current user
+        supportActionBar?.title = intent.getStringExtra("sendername").toString()
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
                 .addOnSuccessListener { result ->
                     for (document in result) {
@@ -49,7 +50,7 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
                 }
         u= ChatData()
         var cnt:Int =0;
-         supportActionBar?.title=name   // setting the name to whom sender to send message
+           // setting the name to whom sender to send message
          tokenkey = constructkey(FromEmail,ToEmail)  // it is used to retrive all data of user from firestore database
           // when the key matches the required document then adapter will update otherwise  it wont and this is how is we will recieve different chat rooms for particular users
       //  setupRecyclerview(FromEmail,ToEmail)   // setting up recylcer view to initiate CHAT Adapter and displaying item Chat  users

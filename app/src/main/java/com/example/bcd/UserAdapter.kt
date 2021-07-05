@@ -47,6 +47,7 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
          holder.thismessage.setOnClickListener {
              val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
              intent.putExtra("senderemail",model.email)
+             intent.putExtra("sendername",model.name)
              Toast.makeText(k,model.name, Toast.LENGTH_SHORT).show()
              k.startActivity(intent)
          }

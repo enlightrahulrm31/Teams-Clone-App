@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.common.collect.ComparisonChain.start
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_boarding.view.*
 import kotlinx.android.synthetic.main.activity_dashboard.view.*
@@ -30,7 +31,9 @@ import java.net.URL
 import java.util.*
 import kotlin.coroutines.coroutineContext
 
-var cntalarmtime :Int =0
+var map = mutableMapOf<String, Any?>()
+var firebaseauthpublic: FirebaseAuth  =FirebaseAuth.getInstance()
+var namemap :String = firebaseauthpublic.currentUser?.email!!
 class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, context: Context):
         FirestoreRecyclerAdapter<TeamMeetingModel, TeamUserAdapter.TeamUserAdapterVH>(options){
      var k = context
@@ -64,7 +67,7 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
         JitsiMeet.setDefaultConferenceOptions(defaultOption)
         holder.thisjoinmeet.setBackgroundColor(Color.MAGENTA)
         holder.thisacceptinvite.setOnClickListener {
-            if(cntalarmtime>0){
+            if(map[namemap] != null ){
                 Toast.makeText(k,"You cant accept multiple invites at a time ", Toast.LENGTH_LONG).show()
                 Toast.makeText(k,"Accept after alarm for first fishes", Toast.LENGTH_SHORT).show()
             }
@@ -114,7 +117,7 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
                 AlarmManager.RTC_WAKEUP,calender.timeInMillis,
                 AlarmManager.INTERVAL_DAY,pendingIntent
         )
-        cntalarmtime++
+        map[namemap] = 1
     }
     fun createNotificationchannel(){
 

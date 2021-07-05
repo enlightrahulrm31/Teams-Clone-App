@@ -11,6 +11,7 @@ class DestinationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_destination)
         buttonstop.setOnClickListener {
              binding.r.stop()
+            cntalarmtime = 0
         }
     }
 }

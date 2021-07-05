@@ -11,7 +11,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.chat_user_left.view.*
-class ChatAdapter(options: FirestoreRecyclerOptions<ChatModel>, context: Context,mail:String):
+class ChatAdapter(options: FirestoreRecyclerOptions<ChatModel>, context: Context):
     FirestoreRecyclerAdapter<ChatModel, ChatAdapter.ChatAdapterVH>(options){
     var k = context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapterVH {

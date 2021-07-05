@@ -49,7 +49,7 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
                 }
         u= ChatData()
         var cnt:Int =0;
-         supportActionBar?.title=name  // setting the name to whom sender to send message
+         supportActionBar?.title=name   // setting the name to whom sender to send message
          tokenkey = constructkey(FromEmail,ToEmail)  // it is used to retrive all data of user from firestore database
           // when the key matches the required document then adapter will update otherwise  it wont and this is how is we will recieve different chat rooms for particular users
       //  setupRecyclerview(FromEmail,ToEmail)   // setting up recylcer view to initiate CHAT Adapter and displaying item Chat  users
@@ -92,8 +92,8 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
             val firestoreRecyclerOptions: FirestoreRecyclerOptions<ChatModel> =
                     FirestoreRecyclerOptions.Builder<ChatModel>()
                             .setQuery(query, ChatModel::class.java).build()
-            userAdapter = ChatAdapter(firestoreRecyclerOptions, this, frommail)       // calling adapter class
-            chatrecyclerView.layoutManager = LinearLayoutManager(this)        // team recycler view is the id for for recycler view item which is present in activity boarding
+            userAdapter = ChatAdapter(firestoreRecyclerOptions, this)       // calling adapter class
+            chatrecyclerView.layoutManager = LinearLayoutManager(this)               // team recycler view is the id for for recycler view item which is present in activity boarding
             chatrecyclerView.adapter = userAdapter
 
     }

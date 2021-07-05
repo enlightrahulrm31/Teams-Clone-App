@@ -30,6 +30,7 @@ import java.net.URL
 import java.util.*
 import kotlin.coroutines.coroutineContext
 
+var cntalarmtime :Int =0
 class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, context: Context):
         FirestoreRecyclerAdapter<TeamMeetingModel, TeamUserAdapter.TeamUserAdapterVH>(options){
      var k = context
@@ -56,7 +57,6 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
         curyear = model.year
         curhour =model.hour
         curminute =model.min
-        mc = curday.toString()+curmonthDay.toString()+curyear.toString()+curhour.toString()+curminute.toString()
         val serverurl = URL("https://meet.jit.si")
         var defaultOption = JitsiMeetConferenceOptions.Builder()
                 .setServerURL(serverurl)
@@ -64,35 +64,57 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
         JitsiMeet.setDefaultConferenceOptions(defaultOption)
         holder.thisjoinmeet.setBackgroundColor(Color.MAGENTA)
         holder.thisacceptinvite.setOnClickListener {
-            Toast.makeText(k, mc, Toast.LENGTH_SHORT).show()
-            createNotificationchannel()
-            setAlarm()
-            holder.thisacceptinvite.setBackgroundColor(Color.GREEN) // Changing the background color of button of user that user get to know that he has accepted the invite
-            holder.thisacceptinvite.setText("INVITE ACCEPTED")    // Changing the text of button so that user get to know that he has accepted the invite
+            if(cntalarmtime>0){
+                Toast.makeText(k,"You cant accept multiple invites at a time ", Toast.LENGTH_LONG).show()
+                Toast.makeText(k,"Accept after alarm for first fishes", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(k, model.day.toString() + model.year.toString() + model.month.toString() + model.hour.toString() + model.min.toString(), Toast.LENGTH_SHORT).show()
+                createNotificationchannel()
+                setAlarm(model.hour!!, model.min!!, model.day!!, model.month!!, model.year!!)
+                holder.thisacceptinvite.setBackgroundColor(Color.GREEN) // Changing the background color of button of user that user get to know that he has accepted the invite
+                holder.thisacceptinvite.setText("INVITE ACCEPTED")    // Changing the text of button so that user get to know that he has accepted the invite
+            }
         }
         holder.thisjoinmeet.setOnClickListener {
-            val opt = JitsiMeetConferenceOptions.Builder().setRoom(mc)
+            val opt = JitsiMeetConferenceOptions.Builder().setRoom(model.day.toString()+model.year.toString()+model.month.toString()+model.hour.toString()+model.min.toString())
                     .setWelcomePageEnabled(false).build()
             JitsiMeetActivity.launch(k,opt)
         }
+        // for meeting chat option
+        holder.thischat.setOnClickListener {
+            Toast.makeText(k,"Chat activity", Toast.LENGTH_LONG).show()
+           gotomeetchat(model.day.toString()+model.year.toString()+model.month.toString()+model.hour.toString()+model.min.toString())
+        }
     }
-    fun setAlarm() {
+
+    private fun gotomeetchat(curtimes:String) {
+        val intent = Intent(k,MeetingChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
+        intent.putExtra("meettimes",curtimes)
+        k.startActivity(intent)
+    }
+    fun setAlarm(hr:Int, min:Int,day:Int, month:Int ,year:Int) {
         alarmManager = k.getSystemService(ALARM_SERVICE) as AlarmManager
         val intent = Intent(k,AlarmReciever::class.java)
         pendingIntent = PendingIntent.getBroadcast(k,0,intent,0)
         calender = Calendar.getInstance()
-        calender[Calendar.MONTH] = curmonthDay!!
+        /* calender[Calendar.MONTH] = curmonthDay!!
         calender[Calendar.YEAR] = curyear!!
         calender[Calendar.DATE] = curday!!
         calender[Calendar.HOUR_OF_DAY] = curhour!!
-        calender[Calendar.MINUTE] = curminute!!
+        calender[Calendar.MINUTE] = curminute!!*/
+        calender[Calendar.MONTH] = month
+        calender[Calendar.YEAR] = year
+        calender[Calendar.DATE] = day
+        calender[Calendar.HOUR_OF_DAY] = hr
+        calender[Calendar.MINUTE] = min
+        var str:String = day.toString()+month.toString()+year.toString()+hr.toString() + min.toString()
+        Toast.makeText(k,"alarm set successfully for:" + str, Toast.LENGTH_LONG).show()
         alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,calender.timeInMillis,
                 AlarmManager.INTERVAL_DAY,pendingIntent
-
         )
-        Toast.makeText(k,"alarm set successfully", Toast.LENGTH_LONG).show()
-
+        cntalarmtime++
     }
     fun createNotificationchannel(){
 
@@ -110,20 +132,18 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
     }
 
     class TeamUserAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         var thismeetingdescription = itemView.Tvmeetingdescription
         var thismeetorganiser = itemView.Tvoraganiser
         var thisacceptinvite = itemView.acceptinvite
         var thisjoinmeet =  itemView.joinmeeting
+        var thischat = itemView.joinchatmeetbutton
+        // for meeting chat options
+
 
     }
 
 }
-
-
-
-/*
-class UserAdapter(options: FirestoreRecyclerOptions<UserModel>, context: Context) :
+/*class UserAdapter(options: FirestoreRecyclerOptions<UserModel>, context: Context) :
         FirestoreRecyclerAdapter<UserModel, UserAdapter.UserAdapterVH>(options) {
     var k = context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapterVH {

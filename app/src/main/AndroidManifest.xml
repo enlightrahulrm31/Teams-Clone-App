@@ -3,8 +3,7 @@
     package="com.example.bcd">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>  <!--permission for phone call -->
-
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- permission for phone call -->
     <uses-feature android:name="android.hardware.wifi" />
 
     <application
@@ -14,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bcd">
-        <activity android:name=".CallingActivity"></activity>
+        <activity android:name=".MeetingChatRecyclerViewActivity"></activity>
+        <activity android:name=".CallingActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ChatRecyclerViewActivity" />
         <activity android:name=".WelcomeActivity" />

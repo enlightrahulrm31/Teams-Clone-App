@@ -43,21 +43,11 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
                  .centerCrop()
                  .placeholder(R.drawable.ic_baseline_person_24)
                  .into(holder.thisuserimage)
-         /*holder.thisuserbbutton.setOnClickListener {
-             Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click
-         }*/
-        /* holder.itemView.setOnClickListener {
-             val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
-             intent.putExtra("senderemail",model.email)
-             intent.putExtra("sendername",model.name)
-             k.startActivity(intent)
-         }*/
-
          var phonenumber :String = model.phoneno.toString()
          holder.thismessage.setOnClickListener {
              val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
              intent.putExtra("senderemail",model.email)
-             intent.putExtra("sendername",model.name)
+             Toast.makeText(k,model.name, Toast.LENGTH_SHORT).show()
              k.startActivity(intent)
          }
          holder.thiscallbutton.setOnClickListener {
@@ -68,6 +58,15 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
              intent.putExtra("phonennumber",model.phoneno)
              k.startActivity(intent)
          }
+         /*holder.thisuserbbutton.setOnClickListener {
+            Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click
+        }*/
+         /* holder.itemView.setOnClickListener {
+              val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
+              intent.putExtra("senderemail",model.email)
+              intent.putExtra("sendername",model.name)
+              k.startActivity(intent)
+          }*/
      }
     class UserAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
          var thisuserName = itemView.Tvusername

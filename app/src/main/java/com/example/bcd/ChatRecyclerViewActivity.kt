@@ -37,12 +37,12 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
         database = FirebaseFirestore.getInstance()
          ToEmail  = intent.getStringExtra("senderemail").toString()  // email of user to whom we are sending message
          FromEmail = firebaseauth.currentUser?.email.toString()   // this will give me the email id of current user
-        name = intent.getStringExtra("sendername").toString()
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
                 .addOnSuccessListener { result ->
                     for (document in result) {
                         if (document.data["email"].toString() == FromEmail) {   // if the email from document is found equal to email of signed in user then we will replace username to loged in user name
                             userurl = document.data["userurl"].toString()
+                            name = document.data["name"].toString()
                             break
                         }
                     }

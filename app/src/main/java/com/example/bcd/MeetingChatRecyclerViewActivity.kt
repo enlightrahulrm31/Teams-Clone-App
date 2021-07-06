@@ -3,6 +3,7 @@ package com.example.bcd
 import ChatAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -10,9 +11,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_chat_recycler_view.*
 import kotlinx.android.synthetic.main.activity_meeting_chat_recycler_view.*
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+const val TOPIC = "/topics/myTopic"
 class MeetingChatRecyclerViewActivity : AppCompatActivity() {
     lateinit var firebaseauth: FirebaseAuth
     lateinit var database: FirebaseFirestore
@@ -26,6 +32,7 @@ class MeetingChatRecyclerViewActivity : AppCompatActivity() {
     var name:String ?=null
     var u= ChatData()
     var  token:String = ""
+    val TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meeting_chat_recycler_view)
@@ -33,6 +40,8 @@ class MeetingChatRecyclerViewActivity : AppCompatActivity() {
         database = FirebaseFirestore.getInstance()
         FromEmail = firebaseauth.currentUser?.email.toString()   // this will give me the email id of current user
         token = intent.getStringExtra("meettimes").toString()
+        //val TOPIC = "/${token}topics/myTopic"
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC) // for notification
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
                 .addOnSuccessListener { result ->
                     for (document in result) {
@@ -47,10 +56,40 @@ class MeetingChatRecyclerViewActivity : AppCompatActivity() {
         sendmessagebuttonmeet.setOnClickListener {
             time = System.currentTimeMillis()
             Toast.makeText(this,token,Toast.LENGTH_LONG).show()
+            // ------
+            val title = FromEmail
+            val message = SendMessageTextmeet.text.toString()
+            if(title.isNotEmpty() && message.isNotEmpty()) {
+                PushNotification(
+                    NotificationData(title, message),
+                    TOPIC
+                ).also {
+                    sendNotification(it)
+                }
+            }
+            //--------
             createmessagedoumnent(FromEmail)
             SendMessageTextmeet.text.clear()
         }
     }
+
+    // code for sending notification
+
+    private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful) {
+                Log.d(TAG, "Response: ${Gson().toJson(response)}")
+            } else {
+                Log.e(TAG, response.errorBody().toString())
+            }
+        } catch(e: Exception) {
+            Log.e(TAG, e.toString())
+        }
+    }
+
+
+
     private fun createmessagedoumnent(frommail:String) {
         u.CHATTEXT = SendMessageTextmeet.text.toString()
         u.SENDEREMAIL=FromEmail

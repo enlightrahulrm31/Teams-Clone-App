@@ -65,7 +65,7 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
                 .setServerURL(serverurl)
                 .setWelcomePageEnabled(false).build()
         JitsiMeet.setDefaultConferenceOptions(defaultOption)
-        holder.thisjoinmeet.setBackgroundColor(Color.MAGENTA)
+        //holder.thisjoinmeet.setBackgroundColor(Color.MAGENTA)
         holder.thisacceptinvite.setOnClickListener {
             if(map[namemap] != null ){
                 Toast.makeText(k,"You cant accept multiple invites at a time ", Toast.LENGTH_LONG).show()

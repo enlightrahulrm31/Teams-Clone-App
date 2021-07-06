@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- permission for phone call -->
     <uses-feature android:name="android.hardware.wifi" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />  <!-- permission to send and recieve notification -->
 
     <application
         android:allowBackup="true"
@@ -13,6 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bcd">
+        <service android:name=".FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+
+        </service>
         <activity android:name=".MeetingChatRecyclerViewActivity"></activity>
         <activity android:name=".CallingActivity" />
         <activity android:name=".ProfileActivity" />

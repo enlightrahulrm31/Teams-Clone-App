@@ -60,12 +60,14 @@ class BoardingActivity : AppCompatActivity() {
         val  intentmanagemeet: Intent = Intent(this,DashboardActivity::class.java)
         val u = firebaseauth.currentUser
         val em = u?.email
+        var phno:String = ""
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
                 .addOnSuccessListener { result ->
                     for (document in result) {
                         if (document.data["email"].toString() == em) {   // if the email from document is found equal to email of signed in user then we will replace username to loged in user name
                             username = document.data["name"].toString()
                             curUserUrl = document.data["userurl"].toString()
+                            phno = document.data["phoneno"].toString()
                             break
                         }
                     }
@@ -96,6 +98,7 @@ class BoardingActivity : AppCompatActivity() {
             dialog.findViewById<ImageView>(R.id.cancelbutton).setOnClickListener {
                 dialog.dismiss()
             }
+            dialog.findViewById<TextView>(R.id.phonenumbertext).text = phno
             dialog.findViewById<Button>(R.id.editprofile).setOnClickListener {
                 val intent = Intent(this,ProfileActivity::class.java)
                 intent.putExtra("name",username)

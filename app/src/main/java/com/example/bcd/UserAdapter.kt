@@ -52,12 +52,21 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
              k.startActivity(intent)
          }
          holder.thiscallbutton.setOnClickListener {
-             Toast.makeText(k,"Calling", Toast.LENGTH_SHORT).show()
-             val intent = Intent(k,CallingActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
-             intent.putExtra("sendername",model.name)
-             intent.putExtra("photourl",model.userurl)
-             intent.putExtra("phonennumber",model.phoneno)
-             k.startActivity(intent)
+             val validation = Validation()
+             if(model.phoneno != null && validation.check_phone_number(model.phoneno!!)) {
+                 Toast.makeText(k, "Calling", Toast.LENGTH_SHORT).show()
+                 val intent = Intent(
+                     k,
+                     CallingActivity::class.java
+                 )  // replace teamrecyclerviewactivity to boarding activity
+                 intent.putExtra("sendername", model.name)
+                 intent.putExtra("photourl", model.userurl)
+                 intent.putExtra("phonennumber", model.phoneno)
+                 k.startActivity(intent)
+             }
+             else{
+                 Toast.makeText(k, "User Phone number is not Valid", Toast.LENGTH_SHORT).show()
+             }
          }
          /*holder.thisuserbbutton.setOnClickListener {
             Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click

@@ -19,6 +19,7 @@ class CallingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calling)
         var curUserUrl :String = intent.getStringExtra("photourl")!!
+        textname.text = intent.getStringExtra("sendername")
         phoneno = intent.getStringExtra("phonennumber")!!
         Glide      // user to download url of the image
             .with(this)

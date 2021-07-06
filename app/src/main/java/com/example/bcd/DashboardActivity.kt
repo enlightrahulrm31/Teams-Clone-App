@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -39,6 +40,8 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setTitle("Create Meet")
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
         val CurrentUserId: String=firebaseauth.currentUser?.uid.toString()
@@ -82,6 +85,12 @@ class DashboardActivity : AppCompatActivity() {
         }
 
 
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val intent = Intent(this,BoardingActivity::class.java)
+        startActivity(intent)
+        finish()
+        return super.onOptionsItemSelected(item)
     }
     private fun showDatePicker() {
         Toast.makeText(this,"date picker",Toast.LENGTH_LONG).show()

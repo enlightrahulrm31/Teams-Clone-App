@@ -1,9 +1,11 @@
 package com.example.bcd
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -25,7 +27,15 @@ class ReclyclerViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reclycler_view)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setTitle("My Contacts")
         setupRecyclerview()
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val intent = Intent(this,BoardingActivity::class.java)
+        startActivity(intent)
+        finish()
+        return super.onOptionsItemSelected(item)
     }
     fun setupRecyclerview(){
         val  query : Query = collectionReference

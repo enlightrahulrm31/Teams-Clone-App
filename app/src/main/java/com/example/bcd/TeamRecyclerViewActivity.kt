@@ -1,7 +1,9 @@
 package com.example.bcd
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.CollectionReference
@@ -19,7 +21,15 @@ class TeamRecyclerViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_team_recycler_view)  // change it to activity_team_recycler_view as activity_reclycler_view
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setTitle("Meetings")
         setupRecyclerview()
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val intent = Intent(this,BoardingActivity::class.java)
+        startActivity(intent)
+        finish()
+        return super.onOptionsItemSelected(item)
     }
     fun setupRecyclerview(){
         val  query : Query = collectionReference.orderBy("day")//.orderBy("hour").orderBy("min") // sorting the query by min,hr,day

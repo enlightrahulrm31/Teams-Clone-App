@@ -7,7 +7,7 @@
     <item
         android:id="@+id/Members"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="All Members"/>
+        android:title="My Contacts"/>
     <item
         android:id="@+id/createMeet"
         android:icon="@drawable/ic_baseline_meeting_room_24"

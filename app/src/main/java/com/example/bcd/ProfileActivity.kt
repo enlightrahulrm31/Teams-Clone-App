@@ -26,7 +26,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         database = FirebaseFirestore.getInstance()
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         val name:String = intent.getStringExtra("name")!!
         val email:String = intent.getStringExtra("email")!!
         getSupportActionBar()?.setTitle(name)

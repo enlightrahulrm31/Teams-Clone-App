@@ -28,7 +28,6 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
      var k = context
      var  name:String ?=null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapterVH {
-       //   val button:Button = dilog.findViewById(R.id.cancelbutton)
          return UserAdapterVH(
              LayoutInflater.from(parent.context).inflate(R.layout.row_users, parent, false)
          )

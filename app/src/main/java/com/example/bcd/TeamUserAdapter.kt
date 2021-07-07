@@ -146,30 +146,3 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
     }
 
 }
-/*class UserAdapter(options: FirestoreRecyclerOptions<UserModel>, context: Context) :
-        FirestoreRecyclerAdapter<UserModel, UserAdapter.UserAdapterVH>(options) {
-    var k = context
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapterVH {
-        return UserAdapterVH(
-                LayoutInflater.from(parent.context).inflate(R.layout.row_users, parent, false)
-        )
-    }
-
-    override fun onBindViewHolder(holder: UserAdapterVH, position: Int, model: UserModel) {
-        holder.thisuserName.text = model.name
-        holder.thisuseremail.text = model.email
-        holder.thisuserbbutton.setOnClickListener {
-            Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click
-        }
-
-    }
-
-    class UserAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        var thisuserName = itemView.Tvusername
-        var thisuseremail = itemView.Tvuseremail
-        var thisuserbbutton = itemView.Tvbutton
-
-    }
-
-}*/

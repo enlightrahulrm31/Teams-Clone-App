@@ -63,7 +63,7 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
         }
 
     }
-    private fun constructkey(a: String, b: String): String {  // creating the token key on basis of which our documnet in firebase database in formed
+    private fun constructkey(a: String, b: String): String {  // creating the token key on basis of which our document in firebase database in formed
           if(a < b){
               return a+b                             // it will be unique for every pair of  users
           }
@@ -89,11 +89,10 @@ class ChatRecyclerViewActivity : AppCompatActivity() {
         var s:String =frommail+tomail
             collectionReference = db.collection(s)
             val query: Query = collectionReference!!//.orderBy("curtime")
-            //val  query2 : Query = collectionReference!!
             val firestoreRecyclerOptions: FirestoreRecyclerOptions<ChatModel> =
                     FirestoreRecyclerOptions.Builder<ChatModel>()
                             .setQuery(query, ChatModel::class.java).build()
-            userAdapter = ChatAdapter(firestoreRecyclerOptions, this)       // calling adapter class
+            userAdapter = ChatAdapter(firestoreRecyclerOptions, this)               // calling adapter class
             chatrecyclerView.layoutManager = LinearLayoutManager(this)               // team recycler view is the id for for recycler view item which is present in activity boarding
             chatrecyclerView.adapter = userAdapter
 

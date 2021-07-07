@@ -20,7 +20,6 @@ class SignInActivity : AppCompatActivity() {
         database = FirebaseFirestore.getInstance()
         val sgnUpButton =findViewById<Button>(R.id.LoginButton)
         sgnUpButton.setOnClickListener{
-            //   Toast.makeText(this, "WORKING", Toast.LENGTH_SHORT).show()
             SignInUser()
         }
     }
@@ -43,13 +42,6 @@ class SignInActivity : AppCompatActivity() {
                                 .addOnSuccessListener { result->
                                     var username :String ="NOT VALID"
                                     var cnt:Int =0
-                                    /*for (document in result){
-                                      //  document.data["Name"] // this is token  like map
-                                        if(document.data["Email"].toString()==email){
-                                             username=document.data["Name"].toString()
-                                            break
-                                        }
-                                    }*/
                                     for (document in result){
                                         if(document.data["email"].toString()==email){
                                             username = document.data["name"].toString()
@@ -64,10 +56,6 @@ class SignInActivity : AppCompatActivity() {
                                     finish()
 
                                 }
-
-
-
-                        //Toast.makeText(this, "Logged In Successfully!.", Toast.LENGTH_SHORT).show()
                     }
                     else{
                         Toast.makeText(this, "Error.", Toast.LENGTH_SHORT).show()

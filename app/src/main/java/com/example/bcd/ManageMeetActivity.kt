@@ -45,7 +45,7 @@ class ManageMeetActivity : AppCompatActivity() {
 
     }
     private fun showDatePicker() {
-        Toast.makeText(this,"date picker",Toast.LENGTH_LONG).show()
+       // Toast.makeText(this,"date picker",Toast.LENGTH_LONG).show()
         val cal  =Calendar.getInstance()
         val year =cal.get(Calendar.YEAR)
         val month =cal.get(Calendar.MONTH)

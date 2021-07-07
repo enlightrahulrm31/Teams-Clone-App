@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "ALREADY LOGGED IN ", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, BoardingActivity::class.java)  // directing the user to boarding activity
             startActivity(intent)
-            finish()    //  finish is used so clear the back stack
+            finish()                        //  finish is used so clear the back stack
         }
         val sign_in_button = findViewById<Button>(R.id.signup)
         val sign_up_button = findViewById<Button>(R.id.signin)

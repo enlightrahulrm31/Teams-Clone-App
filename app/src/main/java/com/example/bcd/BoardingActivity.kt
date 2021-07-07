@@ -31,18 +31,13 @@ class BoardingActivity : AppCompatActivity() {
     lateinit var database: FirebaseFirestore
      var  username:String = "NOT VALID"
     var curUserUrl:String ?=null
-    // added new
     lateinit var db : FirebaseFirestore
     lateinit var collectionReference: CollectionReference
-    var userAdapter: TeamUserAdapter?= null
-    // delete it it not works
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      //  setContentView(R.layout.activity_boarding) // replace row user by activity boarding
         db = FirebaseFirestore.getInstance()
         collectionReference = db.collection("teammeetings")
-        setContentView(R.layout.activity_boarding)  // change it to activity_team_recycler_view as activity_reclycler_view
-        // setupRecyclerview()
+        setContentView(R.layout.activity_boarding)
         var dialog :Dialog = Dialog(this)
         firebaseauth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
@@ -72,10 +67,6 @@ class BoardingActivity : AppCompatActivity() {
                         }
                     }
                 }
-        /*createMeeting.setOnClickListener {
-             startActivity(intentjoinmeet)
-             finish()
-        }*/
         meetings.setOnClickListener {
             startActivity(intentjoinmeet)
 
@@ -112,7 +103,6 @@ class BoardingActivity : AppCompatActivity() {
         }
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
-                // creating toast so that when we click it we get notified
                 R.id.Members->{
                     startActivity(intentdasboard)
                 }
@@ -136,63 +126,18 @@ class BoardingActivity : AppCompatActivity() {
 
 
     }
-    // newly added
-    /*fun setupRecyclerview(){
-        val  query : Query = collectionReference
-        val firestoreRecyclerOptions : FirestoreRecyclerOptions<TeamMeetingModel> =
-                FirestoreRecyclerOptions.Builder<TeamMeetingModel>()
-                        .setQuery(query,TeamMeetingModel::class.java).build()
-        userAdapter = TeamUserAdapter(firestoreRecyclerOptions,this)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = userAdapter
-    }
-    override fun onStart() {
-        super.onStart()
-        userAdapter?.startListening()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        userAdapter?.startListening()
-
-    }
-    // delete it if not works*/
-    /*fun setupRecyclerview(){
-        val  query : Query = collectionReference.orderBy("day")//.orderBy("hour").orderBy("min") // sorting the query by min,hr,day
-        val firestoreRecyclerOptions : FirestoreRecyclerOptions<TeamMeetingModel> =
-                FirestoreRecyclerOptions.Builder<TeamMeetingModel>()
-                        .setQuery(query,TeamMeetingModel::class.java).build()
-        userAdapter = TeamUserAdapter(firestoreRecyclerOptions,this)
-        teamrecyclerView.layoutManager = LinearLayoutManager(this)   // team recycler view is the id for for recycler view item which is present in activity boarding
-        teamrecyclerView.adapter = userAdapter
-    }
-    override fun onStart() {
-        super.onStart()
-        userAdapter?.startListening()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        userAdapter?.startListening()
-
-    }*/
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {   // this is to make the hamberger work so that drawer opens
 
-       // NavHeadername.text = incomingname
-        NavHeadername.text=username  // setting the nav header name to username  (IT IS THE NAV HEADER )
+        NavHeadername.text=username                            // setting the nav header name to username  (IT IS THE NAV HEADER )
         NavHeaderemail.text =firebaseauth.currentUser?.email   // setting the nav user email to email
-        Glide      // user to download url of the image
+        Glide                                                 // user to download url of the image
             .with(this)
             .load(curUserUrl)
             .centerCrop()
             .placeholder(R.drawable.ic_baseline_person_24)
             .into(nav_user_image);
 
-      //  Toast.makeText(this,username, Toast.LENGTH_SHORT).show()
         if(toggle.onOptionsItemSelected(item)){
             return true;
         }

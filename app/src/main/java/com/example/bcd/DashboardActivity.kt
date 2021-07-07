@@ -74,12 +74,6 @@ class DashboardActivity : AppCompatActivity() {
         selecttimemeet.setOnClickListener {
             showTimePicker()
         }
-        /*Buttonjoin.setOnClickListener{
-            val opt = JitsiMeetConferenceOptions.Builder().setRoom("dcsdfe121321awd")
-                .setWelcomePageEnabled(false).build()
-            JitsiMeetActivity.launch(this,opt)
-
-        }*/
         buttonmmeet.setOnClickListener {
             addmeeting()
         }
@@ -93,7 +87,7 @@ class DashboardActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     private fun showDatePicker() {
-        Toast.makeText(this,"date picker",Toast.LENGTH_LONG).show()
+        //Toast.makeText(this,"date picker",Toast.LENGTH_LONG).show()
         val cal  =Calendar.getInstance()
         val year =cal.get(Calendar.YEAR)
         val month =cal.get(Calendar.MONTH)

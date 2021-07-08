@@ -1,30 +1,21 @@
 package com.example.bcd
 
 import android.app.*
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.activity_manage_meet.*
-import org.jitsi.meet.sdk.JitsiMeet
-import org.jitsi.meet.sdk.JitsiMeetActivity
-import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
-import java.net.URI
+import kotlinx.android.synthetic.main.activity_create_meet.*
 import java.net.URL
 import java.util.*
 
-class DashboardActivity : AppCompatActivity() {
+class CreateMeetActivity : AppCompatActivity() {
    lateinit var  serverurl:URL
     lateinit var firebaseauth: FirebaseAuth
     lateinit var database: FirebaseFirestore
@@ -39,7 +30,7 @@ class DashboardActivity : AppCompatActivity() {
     var curyear: Int =1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+        setContentView(R.layout.activity_create_meet)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setTitle("Create Meet")
         firebaseauth = FirebaseAuth.getInstance()
@@ -57,16 +48,6 @@ class DashboardActivity : AppCompatActivity() {
                         }
                     }
                 }
-       // val n = findViewById<TextView>(R.id.Uname)
-        // n.setText(username)
-       //  e.setText(useremailid)
-      //  var codebox :EditText = scode
-       /* var Btn:Button = Buttonjoin
-            serverurl = URL("https://meet.jit.si")
-            var defaultOption =JitsiMeetConferenceOptions.Builder()
-                .setServerURL(serverurl)
-                .setWelcomePageEnabled(false).build()
-            JitsiMeet.setDefaultConferenceOptions(defaultOption) */
         createNotificationchannel()
         selectdatemeet.setOnClickListener {
             showDatePicker()

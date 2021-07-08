@@ -14,12 +14,12 @@ class ValidationTest{
 
     @Test
     fun CheckEmail(){
-        val result = validation.checkemail("rahul@gmail.com")
+        val result = validation.checkemail("123@gmail.com")
         assertThat(result).isTrue()   // it will check if the email provided is true or not
     }
     @Test
     fun CheckPhoneNumber(){
-        val result = validation.check_phone_number("0123456789")
+        val result = validation.check_phone_number("abc789")
         assertThat(result).isTrue()   // it will check if the email provided is true or not
     }
 }

@@ -67,7 +67,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DashboardActivity">
+    tools:context=".CreateMeetActivity">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        app:srcCompat="@drawable/meeting_shedule" />
+
     <EditText
         android:id="@+id/tvdescription"
         android:layout_width="match_parent"
@@ -81,18 +88,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/selecttimetextmeet"
-        android:text="08 : 45 PM"
+        android:text="Update"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="40dp"/>
+
     <TextView
+        android:id="@+id/selectdatetextmeet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/selectdatetextmeet"
-        android:text="update"
+        android:text="Update"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="40dp"/>
+        android:textSize="40dp" />
     <Button
         android:id="@+id/selectdatemeet"
         android:layout_width="match_parent"

@@ -21,7 +21,6 @@ import com.google.common.collect.ComparisonChain.start
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_boarding.view.*
-import kotlinx.android.synthetic.main.activity_dashboard.view.*
 import kotlinx.android.synthetic.main.row_users.view.*
 import kotlinx.android.synthetic.main.team_row_user.view.*
 import org.jitsi.meet.sdk.JitsiMeet
@@ -46,11 +45,10 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
     var curyear:Int ?=null
     var curhour:Int ?=null
     var curminute:Int ?=null
-    var mc:String ?=null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamUserAdapterVH {
-        return TeamUserAdapterVH(
-                LayoutInflater.from(parent.context).inflate(R.layout.team_row_user, parent, false)  // replace onboarding activity to team row user
-        )
+            return TeamUserAdapterVH(
+                    LayoutInflater.from(parent.context).inflate(R.layout.team_row_user, parent, false)  // replace onboarding activity to team row user
+            )
     }
     override fun onBindViewHolder(holder: TeamUserAdapterVH, position: Int, model: TeamMeetingModel) {
         holder.thismeetingdescription.text = model.description
@@ -65,26 +63,27 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
                 .setServerURL(serverurl)
                 .setWelcomePageEnabled(false).build()
         JitsiMeet.setDefaultConferenceOptions(defaultOption)
-        //holder.thisjoinmeet.setBackgroundColor(Color.MAGENTA)
+
         holder.thisacceptinvite.setOnClickListener {
+
             if(map[namemap] != null ){
                 Toast.makeText(k,"You cant accept multiple invites at a time ", Toast.LENGTH_LONG).show()
-                Toast.makeText(k,"Accept after alarm for first fishes", Toast.LENGTH_SHORT).show()
+                Toast.makeText(k,"Accept after alarm for first finishes", Toast.LENGTH_SHORT).show()
             }
             else {
-                Toast.makeText(k, model.day.toString() + model.year.toString() + model.month.toString() + model.hour.toString() + model.min.toString(), Toast.LENGTH_SHORT).show()
                 createNotificationchannel()
                 setAlarm(model.hour!!, model.min!!, model.day!!, model.month!!, model.year!!)
-                holder.thisacceptinvite.setBackgroundColor(Color.GREEN) // Changing the background color of button of user that user get to know that he has accepted the invite
-                holder.thisacceptinvite.setText("INVITE ACCEPTED")    // Changing the text of button so that user get to know that he has accepted the invite
+                holder.thisacceptinvite.setBackgroundColor(Color.GREEN)                              // Changing the background color of button of user that user get to know that he has accepted the invite
+                holder.thisacceptinvite.setText("INVITE ACCEPTED")                                   // Changing the text of button so that user get to know that he has accepted the invite
             }
         }
+
         holder.thisjoinmeet.setOnClickListener {
             val opt = JitsiMeetConferenceOptions.Builder().setRoom(model.day.toString()+model.year.toString()+model.month.toString()+model.hour.toString()+model.min.toString())
                     .setWelcomePageEnabled(false).build()
             JitsiMeetActivity.launch(k,opt)
         }
-        // for meeting chat option
+
         holder.thischat.setOnClickListener {
             Toast.makeText(k,"Chat activity", Toast.LENGTH_LONG).show()
            gotomeetchat(model.day.toString()+model.year.toString()+model.month.toString()+model.hour.toString()+model.min.toString())
@@ -92,7 +91,7 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
     }
 
     private fun gotomeetchat(curtimes:String) {
-        val intent = Intent(k,MeetingChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
+        val intent = Intent(k,MeetingChatRecyclerViewActivity::class.java)
         intent.putExtra("meettimes",curtimes)
         k.startActivity(intent)
     }
@@ -101,18 +100,19 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
         val intent = Intent(k,AlarmReciever::class.java)
         pendingIntent = PendingIntent.getBroadcast(k,0,intent,0)
         calender = Calendar.getInstance()
-        /* calender[Calendar.MONTH] = curmonthDay!!
-        calender[Calendar.YEAR] = curyear!!
-        calender[Calendar.DATE] = curday!!
-        calender[Calendar.HOUR_OF_DAY] = curhour!!
-        calender[Calendar.MINUTE] = curminute!!*/
         calender[Calendar.MONTH] = month
         calender[Calendar.YEAR] = year
         calender[Calendar.DATE] = day
         calender[Calendar.HOUR_OF_DAY] = hr
         calender[Calendar.MINUTE] = min
-        var str:String = day.toString()+month.toString()+year.toString()+hr.toString() + min.toString()
-        Toast.makeText(k,"alarm set successfully for:" + str, Toast.LENGTH_LONG).show()
+        if(hr>12){
+            Toast.makeText(k,"alarm set successfully for: " +String.format("%02d",hr- 12)+ " : " + String.format("%02d",min) + " PM",Toast.LENGTH_LONG).show()
+
+        }
+        else{
+            Toast.makeText(k,"alarm set successfully for: " +String.format("%02d",hr)+ " : " + String.format("%02d",min) + " PM",Toast.LENGTH_LONG).show()
+
+        }
         alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,calender.timeInMillis,
                 AlarmManager.INTERVAL_DAY,pendingIntent
@@ -140,9 +140,6 @@ class TeamUserAdapter(options: FirestoreRecyclerOptions<TeamMeetingModel>, conte
         var thisacceptinvite = itemView.acceptinvite
         var thisjoinmeet =  itemView.joinmeeting
         var thischat = itemView.joinchatmeetbutton
-        // for meeting chat options
-
-
     }
 
 }

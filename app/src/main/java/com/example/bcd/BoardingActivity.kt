@@ -11,58 +11,77 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_boarding.*
-import kotlinx.android.synthetic.main.activity_reclycler_view.*
-import kotlinx.android.synthetic.main.activity_team_recycler_view.*
-import kotlinx.android.synthetic.main.custom_pop.*
 import kotlinx.android.synthetic.main.nav_header.*
-
 class BoardingActivity : AppCompatActivity() {
-    lateinit var toggle :ActionBarDrawerToggle   // this will open the hammberger toogle bar in the action bar
+    lateinit var toggle :ActionBarDrawerToggle    // this will open the hammberger toogle bar in the action bar
+
     lateinit var firebaseauth: FirebaseAuth
+
     lateinit var database: FirebaseFirestore
-     var  username:String = "NOT VALID"
+
+     var  username:String = "Loading"
+
     var curUserUrl:String ?=null
-    lateinit var db : FirebaseFirestore
-    lateinit var collectionReference: CollectionReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        db = FirebaseFirestore.getInstance()
-        collectionReference = db.collection("teammeetings")
+
         setContentView(R.layout.activity_boarding)
+
         var dialog :Dialog = Dialog(this)
+
         firebaseauth = FirebaseAuth.getInstance()
+
         database = FirebaseFirestore.getInstance()
+
         val drawerLayout : DrawerLayout = findViewById(R.id.drawerlayout)
+
         val navView:NavigationView =findViewById(R.id.nav_view)
 
         toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+
         drawerLayout.addDrawerListener(toggle)
+
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val  intentjoinmeet : Intent = Intent(this,TeamRecyclerViewActivity::class.java)
+
         val  intentdasboard: Intent = Intent(this,ReclyclerViewActivity::class.java)
+
         val  intentMainActivity: Intent = Intent(this,MainActivity::class.java)
-        val  intentmanagemeet: Intent = Intent(this,DashboardActivity::class.java)
+
+        val  intentmanagemeet: Intent = Intent(this,CreateMeetActivity::class.java)
+
+        val  intentmyprofile: Intent = Intent(this,ProfileActivity::class.java)
+
+        intentmyprofile.putExtra("name",username)
+
+        intentmyprofile.putExtra("email",firebaseauth.currentUser?.email)
+
         val u = firebaseauth.currentUser
+
         val em = u?.email
+        namemap =em!!
+
         var phno:String = ""
         database.collection("users").get()    // it is used to retrive all data of user from firestore database
                 .addOnSuccessListener { result ->
                     for (document in result) {
                         if (document.data["email"].toString() == em) {   // if the email from document is found equal to email of signed in user then we will replace username to loged in user name
+
                             username = document.data["name"].toString()
+
                             curUserUrl = document.data["userurl"].toString()
+
                             phno = document.data["phoneno"].toString()
+
                             break
                         }
                     }
@@ -95,6 +114,7 @@ class BoardingActivity : AppCompatActivity() {
                 intent.putExtra("name",username)
                 intent.putExtra("email",firebaseauth.currentUser?.email)
                 startActivity(intent)
+                dialog.dismiss()
             }
             dialog.findViewById<TextView>(R.id.DialogUsername).text = username
             dialog.findViewById<TextView>(R.id.DialogEmail).text = firebaseauth.currentUser?.email
@@ -112,7 +132,9 @@ class BoardingActivity : AppCompatActivity() {
                 R.id.managemeet ->{
                     startActivity(intentmanagemeet)
                 }
-                R.id.MyProfile ->Toast.makeText(this,"My Profile", Toast.LENGTH_SHORT).show()
+                R.id.MyProfile -> {
+                    startActivity(intentmyprofile)
+                }
                 R.id.Logout ->{
                     Toast.makeText(this,"Logged out ", Toast.LENGTH_SHORT).show()
                     firebaseauth.signOut()
@@ -126,6 +148,10 @@ class BoardingActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {   // this is to make the hamberger work so that drawer opens
 

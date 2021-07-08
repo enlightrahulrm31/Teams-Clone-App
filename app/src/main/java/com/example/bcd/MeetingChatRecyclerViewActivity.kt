@@ -55,7 +55,7 @@ class MeetingChatRecyclerViewActivity : AppCompatActivity() {
        setupRecyclerview()
         sendmessagebuttonmeet.setOnClickListener {
             time = System.currentTimeMillis()
-            Toast.makeText(this,token,Toast.LENGTH_LONG).show()
+           // Toast.makeText(this,token,Toast.LENGTH_LONG).show()
             // ------
             val title = FromEmail
             val message = SendMessageTextmeet.text.toString()
@@ -98,10 +98,9 @@ class MeetingChatRecyclerViewActivity : AppCompatActivity() {
        database.collection(token).add(u)     // creating database of sender and reciever with unique id as token key  // Now I have to create a key between sender and reciever such that it will unique for these pairs and both reciever and sneder can acess this key
     }
     fun setupRecyclerview(){
-        Toast.makeText(this,token,Toast.LENGTH_LONG).show()
+      //  Toast.makeText(this,token,Toast.LENGTH_LONG).show()
         collectionReference = db.collection(token)
         val query: Query = collectionReference!!
-        //val  query2 : Query = collectionReference!!
         val firestoreRecyclerOptions: FirestoreRecyclerOptions<ChatModel> =
                 FirestoreRecyclerOptions.Builder<ChatModel>()
                         .setQuery(query, ChatModel::class.java).build()

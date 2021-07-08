@@ -46,8 +46,6 @@ class ProfileActivity : AppCompatActivity() {
                                     .placeholder(R.drawable.ic_baseline_person_24)
                                     .into(imagebutton)
                             Phonetext.setText(phno)
-                            Toast.makeText(this,phno,Toast.LENGTH_SHORT).show()
-
                             break
                         }
                     }

@@ -36,11 +36,10 @@ class SignInActivity : AppCompatActivity() {
         firebaseauth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this){
                     if(it.isSuccessful){
-                        // code
-                        //   val userid =firebaseauth.currentUser
-                        database.collection("users").get()    // it is used to retrive all data of user from firestore database
+
+                        database.collection("users").get()                                       // it is used to retrive all data of user from firestore database
                                 .addOnSuccessListener { result->
-                                    var username :String ="NOT VALID"
+                                    var username :String ="Uploading"
                                     var cnt:Int =0
                                     for (document in result){
                                         if(document.data["email"].toString()==email){
@@ -48,10 +47,9 @@ class SignInActivity : AppCompatActivity() {
                                             break
                                         }
                                     }
-                                    //    Toast.makeText(this,"Logged in successfully ", Toast.LENGTH_SHORT).show()
                                     val intent: Intent = Intent(this,BoardingActivity::class.java)
-                                    intent.putExtra("SendingUserName","MAHANT") // passing data to Dashboard activity
-                                    intent.putExtra("UserEmailid",email)  // passing data to Dashboard activity
+                                    intent.putExtra("SendingUserName","MAHANT")           // passing data to Boarding activity
+                                    intent.putExtra("UserEmailid",email)                           // passing data to Boarding activity
                                     startActivity(intent)
                                     finish()
 

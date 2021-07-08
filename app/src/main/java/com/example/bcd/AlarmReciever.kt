@@ -23,7 +23,7 @@ class AlarmReciever: BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context!!,"AlarmManager")
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("ALARM MANAGER")
-            .setContentTitle("WAKE UP ALARM IS RINGING ")
+            .setContentTitle("MEETING ALARM !!")
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_HIGH)

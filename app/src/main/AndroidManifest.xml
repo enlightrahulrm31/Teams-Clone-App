@@ -38,7 +38,7 @@
 
             <!-- you can keep intent here to run recylcer view activity -->
         </activity>
-        <activity android:name=".DashboardActivity" />
+        <activity android:name=".CreateMeetActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SpalshActivity"> <!-- THIS ACTIVITY IS  SPLASH ACTIVITY   here we will put intent -->

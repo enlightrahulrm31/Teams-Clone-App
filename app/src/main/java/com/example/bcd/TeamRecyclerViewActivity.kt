@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.CollectionReference
@@ -14,8 +15,8 @@ import kotlinx.android.synthetic.main.activity_reclycler_view.*
 import kotlinx.android.synthetic.main.activity_team_recycler_view.*
 
 class TeamRecyclerViewActivity : AppCompatActivity() {
-    private val db : FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val collectionReference: CollectionReference = db.collection("teammeetings")
+    private val database : FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val collectionReference: CollectionReference = database.collection("teammeetings")
     var userAdapter: TeamUserAdapter?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {

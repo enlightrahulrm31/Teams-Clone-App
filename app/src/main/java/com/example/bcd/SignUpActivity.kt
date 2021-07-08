@@ -53,35 +53,39 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==12 && data!=null && resultCode==Activity.RESULT_OK){  // checking if all the required condition are satoisfired when the user select image
+        if(requestCode==12 && data!=null && resultCode==Activity.RESULT_OK){                               // checking if all the required condition are satisfied when the user select image
             checkIfuserSelectedImage=true
             selecteduri =data.data
             val bitmap =MediaStore.Images.Media.getBitmap(contentResolver,selecteduri)
-            imagebutton.setImageBitmap(bitmap)    // this is used for round image configuaration
+            imagebutton.setImageBitmap(bitmap)                                                             // this is used for round image configuaration
         }
     }
     var u= User()
     private fun signupuser(){
-        val nameid = findViewById<EditText>(R.id.singupname)       //  id for name of a person
-        val eid = findViewById<EditText>(R.id.singupEmailAddress)   //  id for email address
-        val pss = findViewById<EditText>(R.id.signupPassword)         //  id for password view
-        val cpss = findViewById<EditText>(R.id.signupconfirmPassword)   // id for confirm password view
+        val nameid = findViewById<EditText>(R.id.singupname)                                                //  id for name of a person
+        val eid = findViewById<EditText>(R.id.singupEmailAddress)                                           //  id for email address
+        val pss = findViewById<EditText>(R.id.signupPassword)                                               //  id for password view
+        val cpss = findViewById<EditText>(R.id.signupconfirmPassword)                                        // id for confirm password view
         val name:String = nameid.text.toString()
         val email:String = eid.text.toString()
         val password:String = pss.text.toString()
         val confirmpassword:String = cpss.text.toString()
-        if(email.isBlank() || password.isBlank() || confirmpassword.isBlank()){                                // Handling the case when email , password is left blank
+        val validation =Validation()
+        if(validation.checkemail(email) == false){
+            Toast.makeText(this, "Enter Valid Mail", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(email.isBlank() || password.isBlank() || confirmpassword.isBlank()){                                  // Handling the case when email , password is left blank
             Toast.makeText(this, "Email and password cant be blank.", Toast.LENGTH_SHORT).show()
             return
         }
-        if(password!=confirmpassword){        //  checking the case when password is not equal to confirmed password
+        if(password!=confirmpassword){                                                                           //  checking the case when password is not equal to confirmed password
             Toast.makeText(this, "Password and Confirm Doesnt match .", Toast.LENGTH_SHORT).show()
             return
         }
         firebaseauth.createUserWithEmailAndPassword(email,password)
             .addOnCompleteListener(this){
                 if(it.isSuccessful){
-                    // code
                     ObjectAnimator.ofInt(ProgressBar,"progress",currentProgress)
                         .setDuration(4000)
                         .start()
@@ -93,17 +97,6 @@ class SignUpActivity : AppCompatActivity() {
                         uploadimagetofirebase(email)
                     }
                     else {
-                        // here I have to give default url for the sample image
-                        //  below is trying code  in case the sytem fails delete this and run above code
-                        /*
-                        database.collection("users").add(u)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
-                                val intent = Intent(this,BoardingActivity::class.java)
-                                intent.putExtra("url",it.toString())
-                                startActivity(intent)
-                               finish()
-                            }*/
                         database.collection("users").document(email).set(u)
                             Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this,BoardingActivity::class.java)
@@ -122,19 +115,10 @@ class SignUpActivity : AppCompatActivity() {
     private fun uploadimagetofirebase(email:String) {
         val filename =UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("$filename")
-     //       Toast.makeText(this,selecteduri.toString(), Toast.LENGTH_SHORT).show()
          ref.putFile(selecteduri!!).addOnCompleteListener {
              ref.downloadUrl.addOnSuccessListener{
-                 imgurl=it.toString()    // taking the url of image that we have uploaded in firebase storage
-                 u.USERURL=imgurl    // adding image url to our class user
-                /* database.collection("users").add(u)
-                         .addOnSuccessListener {
-                              Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
-                             //Toast.makeText(this,u.USERURL, Toast.LENGTH_SHORT).show()
-                              val intent = Intent(this,BoardingActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
-                               startActivity(intent)
-                               finish()
-                         }*/
+                 imgurl=it.toString()                                                  // taking the url of image that we have uploaded in firebase storage
+                 u.USERURL=imgurl                                                      // adding image url to our class user
                  database.collection("users").document(email).set(u)
                  Toast.makeText(this, "Account Created Successfully!.", Toast.LENGTH_SHORT).show()
                  val intent = Intent(this,BoardingActivity::class.java)

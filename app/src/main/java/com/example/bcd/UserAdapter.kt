@@ -44,46 +44,46 @@ class UserAdapter(options: FirestoreRecyclerOptions<UserModel>,context: Context)
                  .into(holder.thisuserimage)
          var phonenumber :String = model.phoneno.toString()
          holder.thismessage.setOnClickListener {
-             val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
-             intent.putExtra("senderemail",model.email)
-             intent.putExtra("sendername",model.name)
-             Toast.makeText(k,model.name, Toast.LENGTH_SHORT).show()
-             k.startActivity(intent)
-         }
-         holder.thiscallbutton.setOnClickListener {
-             val validation = Validation()
-             if(model.phoneno != null && validation.check_phone_number(model.phoneno!!)) {
-                 Toast.makeText(k, "Calling", Toast.LENGTH_SHORT).show()
-                 val intent = Intent(
-                     k,
-                     CallingActivity::class.java
-                 )  // replace teamrecyclerviewactivity to boarding activity
+             if(model.email == namemap){
+                 Toast.makeText(k,"Its you", Toast.LENGTH_SHORT).show()
+             }
+             else {
+                 val intent = Intent(k, ChatRecyclerViewActivity::class.java)
+                 intent.putExtra("senderemail", model.email)
                  intent.putExtra("sendername", model.name)
-                 intent.putExtra("photourl", model.userurl)
-                 intent.putExtra("phonennumber", model.phoneno)
+                 Toast.makeText(k, model.name, Toast.LENGTH_SHORT).show()
                  k.startActivity(intent)
              }
-             else{
-                 Toast.makeText(k, "User Phone number is not Valid", Toast.LENGTH_SHORT).show()
+         }
+         holder.thiscallbutton.setOnClickListener {
+             if(model.email == namemap){
+                 Toast.makeText(k,"Its you", Toast.LENGTH_SHORT).show()
+             }
+             else {
+                 val validation = Validation()
+                 if (model.phoneno != null && validation.check_phone_number(model.phoneno!!)) {
+                     Toast.makeText(k, "Calling", Toast.LENGTH_SHORT).show()
+                     val intent = Intent(
+                             k,
+                             CallingActivity::class.java
+                     )
+                     intent.putExtra("sendername", model.name)
+                     intent.putExtra("photourl", model.userurl)
+                     intent.putExtra("phonennumber", model.phoneno)
+                     k.startActivity(intent)
+                 } else {
+                     Toast.makeText(k, "User Phone number is not Valid", Toast.LENGTH_SHORT).show()
+                 }
              }
          }
-         /*holder.thisuserbbutton.setOnClickListener {
-            Toast.makeText(k, holder.thisuserName.text, Toast.LENGTH_SHORT).show()   // this will make appear the name for which the button you click
-        }*/
-         /* holder.itemView.setOnClickListener {
-              val intent = Intent(k,ChatRecyclerViewActivity::class.java)  // replace teamrecyclerviewactivity to boarding activity
-              intent.putExtra("senderemail",model.email)
-              intent.putExtra("sendername",model.name)
-              k.startActivity(intent)
-          }*/
+
      }
     class UserAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
          var thisuserName = itemView.Tvusername
          var thisuseremail = itemView.Tvuseremail
-       //  var thisuserbbutton = itemView.Tvbutton
          var thisuserimage = itemView.Tvuserimage
          var thiscallbutton = itemView.callbutton
-          var thismessage = itemView.messagebutton
+         var thismessage = itemView.messagebutton
      }
 
 }

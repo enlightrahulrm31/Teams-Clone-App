@@ -86,29 +86,37 @@ class BoardingActivity : AppCompatActivity() {
                         }
                     }
                 }
+
         meetings.setOnClickListener {
             startActivity(intentjoinmeet)
 
         }
+
         createMeeting.setOnClickListener {
             startActivity(intentmanagemeet)
 
         }
+
         Mycontact.setOnClickListener {
             startActivity(intentdasboard)
         }
+
         myprofile.setOnClickListener {
             dialog.setContentView(R.layout.custom_pop)
+
             Glide      // user to download url of the image
                     .with(this)
                     .load(curUserUrl)
                     .centerCrop()
                     .placeholder(R.drawable.ic_baseline_person_24)
                     .into(dialog.findViewById(R.id.userimage))
+
             dialog.findViewById<ImageView>(R.id.cancelbutton).setOnClickListener {
                 dialog.dismiss()
             }
+
             dialog.findViewById<TextView>(R.id.phonenumbertext).text = phno
+
             dialog.findViewById<Button>(R.id.editprofile).setOnClickListener {
                 val intent = Intent(this,ProfileActivity::class.java)
                 intent.putExtra("name",username)
@@ -116,8 +124,11 @@ class BoardingActivity : AppCompatActivity() {
                 startActivity(intent)
                 dialog.dismiss()
             }
+
             dialog.findViewById<TextView>(R.id.DialogUsername).text = username
+
             dialog.findViewById<TextView>(R.id.DialogEmail).text = firebaseauth.currentUser?.email
+
             dialog.show()
 
         }

@@ -30,7 +30,7 @@ class AlarmReciever: BroadcastReceiver() {
             .setContentIntent(pendingintent)
 
         val notificationManager = NotificationManagerCompat.from(context)
-        r.play()
+        r.play()                                            // playing alarm sound
         notificationManager.notify(123,builder.build())
 
     }

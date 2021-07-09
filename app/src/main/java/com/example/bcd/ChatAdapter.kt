@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.chat_user_left.view.*
 class ChatAdapter(options: FirestoreRecyclerOptions<ChatModel>, context: Context):
     FirestoreRecyclerAdapter<ChatModel, ChatAdapter.ChatAdapterVH>(options){
     var k = context
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapterVH {
             return ChatAdapterVH(
                     LayoutInflater.from(parent.context).inflate(R.layout.chat_user_left, parent, false)
@@ -21,7 +22,9 @@ class ChatAdapter(options: FirestoreRecyclerOptions<ChatModel>, context: Context
     }
     override fun onBindViewHolder(holder: ChatAdapterVH, position: Int, model: ChatModel) {
             holder.thismessage.text = model.chattext.toString()
+
             holder.thisuser.text = model.sendername
+
             holder.thismail.text = model.senderemail
             Glide      // used to download url of the image
                     .with(k)

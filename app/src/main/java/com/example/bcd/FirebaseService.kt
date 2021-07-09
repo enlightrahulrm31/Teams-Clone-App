@@ -30,7 +30,9 @@ class FirebaseService : FirebaseMessagingService() {
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
+
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(message.data["title"])
             .setContentText(message.data["message"])
@@ -44,12 +46,15 @@ class FirebaseService : FirebaseMessagingService() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager) {
+
         val channelName = "channelName"
+
         val channel = NotificationChannel(CHANNEL_ID, channelName, IMPORTANCE_HIGH).apply {
             description = "My channel description"
             enableLights(true)
             lightColor = Color.GREEN
         }
+
         notificationManager.createNotificationChannel(channel)
     }
 

@@ -7,26 +7,13 @@ class Validation {
 
     fun checkemail(email:String ):Boolean{
 
-        if(email.matches((EMAIL_PATTERN.toRegex()))){
-            return true
-        }
-        else{
-            return false
-        }
+        return email.matches((EMAIL_PATTERN.toRegex()))
 
     }
 
     fun check_phone_number(phonenumber:String):Boolean{
-         if(phonenumber.length==10  &&  phonenumber.matches(PHONE_NO_PATTERN.toRegex())){
-             return true
-         }
-        else{
-             return false
-         }
+
+        return phonenumber.length==10  &&  phonenumber.matches(PHONE_NO_PATTERN.toRegex())
     }
-
-
-
-
 
 }

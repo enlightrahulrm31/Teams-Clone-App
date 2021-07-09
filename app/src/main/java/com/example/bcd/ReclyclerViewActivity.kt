@@ -25,22 +25,33 @@ class ReclyclerViewActivity : AppCompatActivity() {
     var userAdapter: UserAdapter?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_reclycler_view)
+
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setTitle("My Contacts")
+
         setupRecyclerview()
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         val intent = Intent(this,BoardingActivity::class.java)
+
         startActivity(intent)
         finish()
+
         return super.onOptionsItemSelected(item)
     }
+
     fun setupRecyclerview(){
         val  query : Query = collectionReference
+
         val firestoreRecyclerOptions : FirestoreRecyclerOptions<UserModel> =FirestoreRecyclerOptions.Builder<UserModel>()
             .setQuery(query,UserModel::class.java).build()
+
         userAdapter = UserAdapter(firestoreRecyclerOptions,this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = userAdapter

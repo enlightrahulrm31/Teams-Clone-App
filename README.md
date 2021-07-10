@@ -14,7 +14,7 @@ is an android  app  which helps to organise Team meeting .
 
 * One to one Chat and audio Calling functionality with other users.
 
-* Realtime data feching 
+* Realtime data fetching 
 
 
 # Technology Stack
@@ -24,3 +24,8 @@ is an android  app  which helps to organise Team meeting .
 *  Storing and Managing Data : [Cloud Database-Firestore](https://firebase.google.com/docs/firestore)
 *  Posting Request to Firebase API : [Retrofit](https://square.github.io/retrofit/)
 *  Alarm : [Android-Alarm-Manager](https://developer.android.com/reference/android/app/AlarmManager)
+
+# System Testing 
+* Performed Unit test using Java Virtual Machine (JVM) 
+* Tool used for unit testing project is JUnit4
+* Related Documentation : [Android-Studio-Test](https://developer.android.com/studio/test)

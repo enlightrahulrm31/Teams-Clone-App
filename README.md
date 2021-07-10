@@ -29,3 +29,10 @@ is an android  app  which helps to organise Team meeting .
 * Performed Unit test using Java Virtual Machine (JVM) 
 * Tool used for unit testing project is JUnit4
 * Related Documentation : [Android-Studio-Test](https://developer.android.com/studio/test)
+
+# Documentation 
+* [Teams Clone Android App](https://developer.android.com/studio/test)  
+ The documentaion of this app is devided into two parts    
+  1) Developers Guide (Designed to help developers who want to understand the technical aspects)  
+  2) Users Guide (Designed to help users to better understand all the available features and how to use them)
+

@@ -1,66 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DashboardActivity">
-
-
-    <TextView
-        android:id="@+id/Uname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/scode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Enter secret code "
-        app:layout_constraintTop_toBottomOf="@+id/Uname"
-        tools:layout_editor_absoluteX="67dp" />
-
-    <Button
-        android:id="@+id/Buttonjoin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Meet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.356"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scode" />
-
-    <EditText
-        android:id="@+id/tvdescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Enter The Description"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Buttonjoin"
-        tools:layout_editor_absoluteX="67dp"/>
-    <Button
-        android:id="@+id/buttonaddmeet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADD MEET"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvdescription" />
-</androidx.constraintlayout.widget.ConstraintLayout>
--->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -118,14 +56,7 @@
         android:layout_marginHorizontal="26dp"
         android:text="Select time"
         android:textSize="26dp"/>
-  <!--  <Button
-        android:id="@+id/setalarmmeet"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginHorizontal="26dp"
-        android:text="SET ALARM"
-        android:textSize="26dp"/> -->
+
     <Button
         android:id="@+id/buttonmmeet"
         android:layout_width="match_parent"

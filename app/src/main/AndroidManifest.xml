@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bcd">
 
-        <service android:name=".FirebaseService"
+        <service android:name=".FirebaseServices.FirebaseService"
             android:permission="com.google.android.c2dm.permission.SEND">
 
             <intent-filter>
@@ -26,24 +26,24 @@
 
         </service>
 
-        <activity android:name=".MeetingChatRecyclerViewActivity"></activity>
-        <activity android:name=".CallingActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".ChatRecyclerViewActivity" />
-        <activity android:name=".TeamRecyclerViewActivity" />
-        <activity android:name=".DestinationActivity" />
-        <activity android:name=".ManageMeetActivity" />
-        <activity android:name=".BoardingActivity">
+        <activity android:name=".RecyclerViewActivity.MeetingChatRecyclerViewActivity"></activity>
+        <activity android:name=".Activity.CallingActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".RecyclerViewActivity.ChatRecyclerViewActivity" />
+        <activity android:name=".RecyclerViewActivity.TeamRecyclerViewActivity" />
+        <activity android:name=".Activity.DestinationActivity" />
+        <activity android:name=".Activity.ManageMeetActivity" />
+        <activity android:name=".Activity.BoardingActivity">
 
 
         </activity>
-        <activity android:name=".ReclyclerViewActivity">
+        <activity android:name=".RecyclerViewActivity.ReclyclerViewActivity">
         </activity>
-        <activity android:name=".CreateMeetActivity" />
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".Activity.CreateMeetActivity" />
+        <activity android:name=".Activity.SignInActivity" />
+        <activity android:name=".Activity.SignUpActivity" />
 
-        <activity android:name=".SpalshActivity">                                             <!-- THIS ACTIVITY IS  SPLASH ACTIVITY   here we will put intent -->
+        <activity android:name=".Activity.SpalshActivity">                                             <!-- THIS ACTIVITY IS  SPLASH ACTIVITY   here we will put intent -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,9 +51,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity.MainActivity" />
 
-        <receiver android:name=".AlarmReciever" />
+        <receiver android:name=".Reciever.AlarmReciever" />
 
     </application>
 

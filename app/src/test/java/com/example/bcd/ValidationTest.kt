@@ -1,11 +1,12 @@
 package com.example.bcd
 
+import com.example.bcd.Validation.Validation
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 
 class ValidationTest{
-    private lateinit var validation :Validation
+    private lateinit var validation : Validation
 
     @Before
     fun setUp(){

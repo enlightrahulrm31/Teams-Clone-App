@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DestinationActivity">
+    tools:context=".Activity.DestinationActivity">
     <Button
         android:id="@+id/buttonstop"
         android:layout_width="wrap_content"

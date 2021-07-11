@@ -1,6 +1,9 @@
 # Teams-Clone-App
 Teams Clone App 
-is an android  app  which helps to organise Team meeting .
+is an android  app  which helps to organise Team meeting
+
+![](https://github.com/enlightrahulrm31/Teams-Clone-App/blob/master/app/src/main/res/drawable/my_post_github.png)
+
 
 # Features
 
@@ -31,7 +34,7 @@ is an android  app  which helps to organise Team meeting .
 * Related Documentation : [Android-Studio-Test](https://developer.android.com/studio/test)
 
 # Documentation 
-* [Teams Clone Android App](https://developer.android.com/studio/test)  
+* [Teams Clone Android App](https://drive.google.com/file/d/13Bb8uPS3bqSMunIC2ei9bH6b5YHTAbS-/view?usp=sharing)  
  The documentaion of this app is divided into two parts    
   1) Developers Guide (Designed to help developers who want to understand the technical aspects)  
   2) Users Guide (Designed to help users to better understand all the available features and how to use them)  

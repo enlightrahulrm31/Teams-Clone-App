@@ -31,6 +31,7 @@ is an android  app  which helps to organise Team meeting
 # System Testing 
 * Performed Unit test using Java Virtual Machine (JVM) 
 * Tool used for unit testing project is JUnit4
+* [Koltin Code for validation](https://github.com/enlightrahulrm31/Teams-Clone-App/blob/master/app/src/test/java/com/example/bcd/ValidationTest.kt)
 * Related Documentation : [Android-Studio-Test](https://developer.android.com/studio/test)
 
 # Documentation 
@@ -45,3 +46,11 @@ is an android  app  which helps to organise Team meeting
 * minSdkVersion 26  (Android 8.0)  
 * targetSdkVersion 30  (Android 11)
 
+# Installation 
+* Using Source Code 
+  1) Clone the repository in you Android Studio .
+  2) After Seeting up the project,click on Build -> Build Bundles/APK(s) -> Build APK(s)
+  3) An APK file will genrate on you project folder  [Project Destination]\app\build\outputs\apk\debug
+  4) Install in on your Android Phone and App is ready to Run on Android Device :relaxed:
+* Download this [APK file](https://drive.google.com/file/d/1t6Uq4gwwZwgh_YPCT00FJWMkVa1D3k5Y/view?usp=sharing)  
+  1)Install it on your Android Phone and App is ready to Run :relaxed:
